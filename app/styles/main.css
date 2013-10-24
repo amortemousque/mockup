@@ -1,0 +1,129 @@
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+/*******************************
+Common
+********************************/
+
+.container {
+    margin-top:60px;
+}
+
+.side-menu {
+    height:1000px;
+}
+
+/*******************************
+Canvas
+********************************/
+.canvas {
+    background-color: #333333;
+}
+.canvas.canvas-main {
+    width:100%;
+    height:1000px;
+}
+
+.canvas-darker {
+    background-color: #333333;
+}
+
+.canvas-xs {
+    width:40px;
+    height:30px;
+
+}
+
+/*******************************
+List
+********************************/
+.list-tools li {
+    margin-bottom: 7px;
+}
+ 
+.list-item-layers li {
+    display: block;
+    margin-top:3px;
+    padding: 3px 2px;
+    line-height: 32px;
+    vertical-align: middle;
+}
+.item-layer {
+    background-color: #ccc;
+}
+
+.item-layer a {
+    display: block;
+}
+.item-layer span {
+    margin-left:10px;
+}
+/*******************************
+Button
+********************************/
+.btn.btn-tool {
+    height: 37px;
+    padding:0px;
+    width:100%;
+    background: none;
+    padding-bottom:3px;
+}
+
+.btn.btn-tool:hover {
+    border:1px solid #ccc;
+}
+
+.btn.btn-remove {
+    position: absolute;
+    top : -10px;
+    right: -10px;
+    border-radius: 20px;
+    padding:5px;
+    vertical-align: middle;
+    border:1px solid #ccc;
+    background-color: #fff;
+    z-index: 10000;
+}
+/*******************************
+Elements
+********************************/
+.elem {
+    color:#fff;
+    position: absolute;
+    z-index: 10;
+    background-color: #fff;
+}
+
+.elem.active {
+    border:1px solid red !important;
+}
+
+.elem.elem-text textarea {
+    position: absolute;
+    resize: none;
+    border:none;
+    width:100%;
+    height:100%;
+    border-radius:0px;
+}
+
+.elem.elem-content {
+    position: absolute;
+}
+
+textarea.disabled {
+    background:transparent;
+    border:none;
+    z-index: -10px;
+}
+/*******************************
+Layers
+********************************/
+.layer {
+    display:block;
+    width:100%;
+    height:1000px;
+}
