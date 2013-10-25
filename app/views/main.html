@@ -30,31 +30,11 @@
 				<div class="side-menu">
 					<div class="panel panel-default">
 					  <div class="panel-heading">Tools</div>
-					  <div class="panel-body resize-vertical">
+					  <div ng-controller="ToolCtrl" class="panel-body resize-vertical">
 					    <ul class="list-tools list-unstyled">
-							<li>
-								<button class="btn btn-tool" data-tool="move">
-							       <span class="glyphicon glyphicon-arrow-up"></span>
-								</button>
-							</li>
-							<li>
-								<button class="btn btn-tool btn-shape" data-tool="shape">
-							       <span class="glyphicon glyphicon-unchecked"></span>
-								</button>
-							</li>
-							<li>
-								<button class="btn btn-tool">
-							       <span class="glyphicon glyphicon-move"></span>
-								</button>
-							</li>
-							<li>
-								<button class="btn btn-tool btn-text" data-tool="text">
-							       <span class="glyphicon glyphicon-text-width"></span>
-								</button>
-							</li>
-							<li>
-								<button class="btn btn-tool btn-text" data-tool="text">
-							       <span class="glyphicon glyphicon-camera"></span>
+							<li ng-repeat="tool in tools">
+								<button class="btn btn-tool" data-tool="{{tool.name}}">
+							       <span class="glyphicon glyphicon-{{tool.img}}"></span>
 								</button>
 							</li>
 						</ul>
@@ -63,9 +43,9 @@
 				</div>
 			</div>
 			<div class="col-md-8 col-lg-8">
-				<div id="canvas" class="canvas canvas-main canvas-darker">
+				<div ng-controller="LayerCtrl" id="canvas" class="canvas canvas-main canvas-darker">
 					<lu class="list-layer">
-						<li class="layer position-1 active"></li>
+						<li ng-repeat="layer in layers" class="layer position-1 active"></li>
 					</lu>
 				</div>
 			</div>
@@ -97,16 +77,13 @@
 					      </h4>
 					    </div>
 					    <div id="collapseThree" class="panel-collapse collapse in">
-					      <div class="panel-body">	
+					      <div ng-controller="LayerCtrl" class="panel-body">
 					        <ul class="list-item-layers list-unstyled">
-					        	<li class="item-layer">
-					        		<a href="#"><canvas class="canvas canvas-xs pull-left"></canvas><span>Layer 1</span></a></li>
-					        	<li class="item-layer">
-					        		<a href="#"><canvas class="canvas canvas-xs pull-left"></canvas><span>Layer 1</span></a></li>
-					        	<li class="item-layer">
-					        		<a href="#"><canvas class="canvas canvas-xs pull-left"></canvas><span>Layer 1</span></a></li>
-					        	<li class="item-layer">
-					        		<a href="#"><canvas class="canvas canvas-xs pull-left"></canvas><span>Layer 1</span></a>
+					        	<li ng-repeat="layer in layers" class="item-layer">
+					        		<a href="#">
+					        			<canvas class="canvas canvas-xs pull-left"></canvas>
+					        			<span>{{layer.name}}</span>
+					        		</a>
 					        	</li>
 					        </ul>
 					      </div>
