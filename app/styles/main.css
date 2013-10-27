@@ -53,6 +53,7 @@ List
 }
 .item-layer {
     background-color: #ccc;
+    height:35px;
 }
 
 .item-layer a {
@@ -60,6 +61,18 @@ List
 }
 .item-layer span {
     margin-left:10px;
+}
+
+.item-layer span {
+    margin-left:10px;
+}
+
+.item-layer .form-control {
+    display: inline-block;
+    margin-left:10px;
+    width: auto;
+    height: 30px;
+    margin:0px;
 }
 /*******************************
 Button
@@ -94,24 +107,30 @@ Elements
     color:#fff;
     position: absolute;
     z-index: 10;
-    background-color: #fff;
 }
+
+
 
 .elem.active {
     border:1px solid red !important;
 }
 
 .elem.elem-text textarea {
+    color:#fff;
     position: absolute;
     resize: none;
     border:none;
     width:100%;
     height:100%;
     border-radius:0px;
+    background: transparent;
+    z-index: 100;   
 }
 
-.elem.elem-content {
+.elem .elem-content {
     position: absolute;
+    width:100%;
+    height:100%;
 }
 
 textarea.disabled {

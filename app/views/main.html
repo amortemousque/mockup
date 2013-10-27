@@ -33,7 +33,7 @@
 					  <div ng-controller="ToolCtrl" class="panel-body resize-vertical">
 					    <ul class="list-tools list-unstyled">
 							<li ng-repeat="tool in tools">
-								<button ng-click="activateTool(tool.name)" class="btn btn-tool ng-class:[tool.status]">
+								<button ng-click="activateTool(tool)" class="btn btn-tool ng-class:[tool.status]">
 							       <span class="glyphicon glyphicon-{{tool.img}}"></span>
 								</button>
 							</li>
@@ -43,12 +43,8 @@
 				</div>
 			</div>
 			<div class="col-md-8 col-lg-8">
-				<div  id="canvas" class="canvas canvas-main canvas-darker">
-					<lu class="list-layer">
-						<li ng-click=""ng-repeat="layer in layers" class="layer position-1 active">
-							<element></element>
-						</li>
-					</lu>
+				<div ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker">
+			      	<div ng-include src="'views/tool/list.html'"></div>
 				</div>
 			</div>
 			<div class="col-md-3 col-lg-3">
@@ -81,8 +77,6 @@
 					    <div id="collapseThree" class="panel-collapse collapse in">
 					      <div class="panel-body">
 					      	<div ng-include src="'views/layer/list.html'"></div>
-						    <button ng-click="addLayer()">New</button>
-					      	<div ng-include src="templateDetails"></div>
 					      </div>
 					    </div>
 					  </div>

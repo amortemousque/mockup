@@ -1,30 +1,23 @@
 'use strict';
 
-angular.module('mockupApp')
-  .controller('LayerCtrl', function ($scope) {
-  	
+mockupApp
+  .controller('LayerCtrl', ['$scope', 'layerService', 'toolService', function ($scope, layerService, toolService) {
 
-  	$scope.layers = [
-      {name: 'Layer 1'},
-      {name: 'Layer 2'}
-    ];
-    $scope.layers = [
-      {name: 'Layer 1'},
-      {name: 'Layer 2'}
-    ];
-
+  	$scope.layers = layerService.getAll();
+  	$scope.toolService = toolService;
+  	$scope.layerService = layerService;
     $scope.templateDetails = "";
-    
-    $scope.addLayer = function(){
-    	$scope.templateDetails = "views/layer/detail.html";
-
+    $scope.addLayerOnCanvas = function(){
+    	var tool = $scope.toolService.getActive();
+    	console.log(tool);
+    	if(tool != undefined) {
+    		var newLayer = {type: tool.type, isShow: true, isActive: true};
+	  		$scope.layerService.add(newLayer);
+	  	}
     }
-	
-	$scope.saveLayer = function(toolName) {
-	  	$scope.layers.push({name : 'test'});
-	};
 
 	$scope.editName = function() {
 
 	}
- });
+
+ }]);

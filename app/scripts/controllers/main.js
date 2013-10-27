@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mockupApp')
+mockupApp
   .controller('MainCtrl', function ($scope) {
     window.mouseX;
     window.mouseY;

@@ -1,28 +1,29 @@
-angular.module('mockupApp').
-  directive('element', function() {
+mockupApp
+  .directive('element', ["toolService", "layerService", function(toolService, layerService) {
       return {
-        restrict: 'E',
-        transclude: false,
-        scope: {},
-        replace: false,
+        restrict: 'EA',
+        transclude: true,
+        scope: {newLayer: '@',  layers: '@'},
+        replace: true,
+        link: function ($scope, $element, $attr, controller) {
+          console.log($scope.layers);
+        },
         controller: function($scope, $element) {
           $scope.mouseenterElem = function(){
-            var elem = $(this);
-              elem.find(".btn-remove").removeClass("hide");
-              $("#field-style").val(elem.attr("style"));
+            console.log("mouseenterElem");
+              $element.find(".btn-remove").removeClass("hide");
+              $("#field-style").val($element.attr("style"));
           }
 
           $scope.mouseleaveElem = function(){
-            $(this).find(".btn-remove").addClass("hide");
+            console.log("mouseleaveElem");
+            $element.find(".btn-remove").addClass("hide");
           } 
 
-          $scope.clickElem = function() {
+          $scope.clickElem = function($event) {
             $(".canvas .elem").removeClass("active");
             $(this).addClass("active");
-          }
-
-          $scope.getActiveTool = function(){
-            return $(".list-tools .btn.active").data("tool");
+            $event.stopPropagation();
           }
 
           $scope.getActiveElem = function(){
@@ -32,63 +33,84 @@ angular.module('mockupApp').
           $scope.getActiveLayer = function(){
             return $(".canvas .layer.active");
           }
-            
-          $scope.dblClickTextElem = function(){
-            console.log("dblclickHandler",this);
-              if($(this).find("textarea").length != 0){
-              $(this).find("textarea").removeClass("hide");
-            }
-          }
-
-          $scope.blurTextElem = function(){
-            console.log("blurTextElem");
-            var textArea = $($(this).find("textarea"))
-            .addClass("hide");
-            $(this).find(".elem-content").html(textArea.val());
-          }
-
-          $scope.clickRemoveElement = function(){
-            $(this).parent().remove();
-            return false;
+          
+          $scope.clickRemoveElement = function($event){
+            console.log($scope.layer);
+            layerService.remove($scope.layer.id);
+            $event.stopPropagation();
           }
           
-          $scope.keyupFieldStyle = function(){
-            var elem = getActiveElem();
-            elem.attr("style", $(this).val());
+          $scope.initElemText = function(){
+              $scope.dblClickTextElem = function(){
+                console.log("dblclickHandler",this);
+                $scope.$textarea.show().focus();
+                $scope.$text.hide();
+                return false;
+              }
+              $scope.blurTextElem = function(){
+                console.log("blurTextElem");
+                console.log($element.find(".elem-content"));
+                $scope.$text.html($scope.$textarea.val()).show();
+                $scope.$textarea.hide();
+                return false;
+
+              }
+              $scope.$text = $("<p>").appendTo($scope.$content);
+              $scope.$textarea = $("<textarea>")
+                .css({
+                  "top": 0, 
+                  "left": 0})
+                .appendTo($scope.$content)
+                .addClass("form-control")
+                .focusout($scope.blurTextElem)
+                .focus();
+              $element.dblclick($scope.dblClickTextElem);
           }
-
-
+          $scope.tool = toolService.getActive();
+          $scope.layer = layerService.getActive();
+          console.log($scope.layer);
           canvasPosition = $("#canvas").offset();
           var topPosition =  window.mouseY - canvasPosition.top;
           var leftPosition =  window.mouseX - canvasPosition.left;
 
           var startX = 0, startY = 0, x = 0, y = 0;
           var paramsDraggable = { containment: "#canvas", scroll: false };
-
           $element.css({
-           position: 'absolute',
-           top: topPosition,
-           left: leftPosition,
-           cursor: 'pointer',
-           width: 40,
-           height: 40,
-           border: "solid 1px #fff"
-           }).addClass("elem")
+             position: 'absolute',
+             top: topPosition,
+             left: leftPosition,
+             cursor: 'pointer',
+             width: 100,
+             height: 100,
+             border: "solid 1px #fff"
+           })
           .resizable()
-          .draggable()
-          .append("<div class='elem-content'>")
-          .focusout(blurTextElem)
-          .mouseenter(mouseenterElem)
-          .mouseleave(mouseleaveElem)
-          .click(clickElem);
+          .draggable({ containment: "#canvas", scroll: false });
 
-          var btnRemove = 
-                $("<button>").addClass("btn")
-                .addClass("btn-remove")
-                .click(clickRemoveElement)
-                .append("<i class='glyphicon glyphicon-trash'></i>")
-                .appendTo(elem);
-        }
+          if( $scope.tool.name == "text"){
+            $scope.initElemText();
+          }
+        },
+        template : 
+        '<div class="elem elem-{{tool.type}}" ng-mouseleave="mouseleaveElem()"  ng-mouseenter="mouseenterElem()" ng-click="clickElem($event)">' +
+          '<div class="elem-content" ng-transclude>' +
+          '</div>' +
+          '<div class="elem-footer">' +
+            '<button ng-click="clickRemoveElement($event)" class="btn btn-remove">' +
+              '<span class="glyphicon glyphicon-trash"></span>' + 
+            '</button>' +
+          '</div>' +
+        '</div>',
       }
-    
-  });
+  }]);
+
+angular.module('mockupApp').directive('ngBlur', ['$parse', function($parse) {
+  return function(scope, element, attr) {
+    var fn = $parse(attr['ngBlur']);
+    element.bind('blur', function(event) {
+      scope.$apply(function() {
+        fn(scope, {$event:event});
+      });
+    });
+  }
+}]);
