@@ -1,9 +1,6 @@
-<ul class="list-item-layers list-unstyled">
-	<li ng-repeat="layer in layers" class="item-layer">
-		<a class="pull pull-left">
-			<canvas class="pull-left canvas canvas-xs pull-left"></canvas>
-			<input class="pull-right form-control" ng-readonly="layer.isShow" ng-blur="layer.isShow = true" ng-dblclick="layer.isShow = false" ng-model="layer.name" value="{{layer.name}}"/>
-
-		</a>
+<lu class="list-layer">
+	<li ng-repeat="layer in layers" data-type="{{layer.type}}" class="layer position-1 active">
+		<element>
+		</element>
 	</li>
-</ul>
+</lu>
