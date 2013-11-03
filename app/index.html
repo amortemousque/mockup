@@ -12,6 +12,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="bower_components/spectrum/spectrum.css">
         <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -65,15 +66,23 @@
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <!-- endbuild -->
+    
+        <script src="bower_components/spectrum/spectrum.js"></script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/tool.js"></script>
-        <script src="scripts/controllers/layer.js"></script>
-        <script src="scripts/services/services.js"></script>
-        <script src="scripts/directives/layerElement.js"></script>
+        <script src="scripts/common/CommonDirective.js"></script>
+        <script src="scripts/layer/LayerDirective.js"></script>
 
+        <script src="scripts/layer/LayerService.js"></script>
+        <script src="scripts/tool/ToolService.js"></script>
+
+        <script src="scripts/base/MainController.js"></script>
+        <script src="scripts/layer/LayerController.js"></script>
+        <script src="scripts/layer/LayerMenuController.js"></script>
+
+        <script src="scripts/tool/ToolController.js"></script>
+        <script src="scripts/base/PropertiesController.js"></script>
 
         <!-- endbuild -->
 </body>

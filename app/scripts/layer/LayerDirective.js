@@ -1,11 +1,12 @@
 mockupApp
   .directive('element', ["toolService", "layerService", function(toolService, layerService) {
       return {
-        restrict: 'EA',
+        restrict: 'E',
         transclude: true,
-        scope: {},
+        scope: false,
         replace: true,
-        controller: function($scope, $element) {
+        require: 'ngModel',
+        link: function($scope, $element, attr, ngModel) {
           $scope.mouseFocusElem = function(){
             console.log("mouseFocusElem");
               $element.find(".btn-remove").removeClass("hide");
@@ -18,9 +19,6 @@ mockupApp
           }
 
           $scope.clickElem = function($event) {
-            console.log("clickElem",$scope.layer);
-            $scope.attachPropertyPanel();
-            $scope.setActive();
             $event.stopPropagation();
           }
           $scope.dragElem = function(){
@@ -32,23 +30,7 @@ mockupApp
           $scope.resizeElem = function(){
             console.log("resize");
           }
-          $scope.setActive = function() {
-            console.log("setActive", $element);
-            layerService.setActive($scope.layer)
-            $(".canvas .elem").removeClass("active");
-            $element.addClass("active");
-          }
 
-          $scope.attachPropertyPanel = function(){
-            $scope.properties.color = $scope.$content.css("color");
-            $scope.properties.fontFamilly = $scope.$content.css("font-familly");
-            $scope.properties.fontSize = $scope.$content.css("font-size");
-            $scope.properties.lineHeight = $scope.$content.css("line-height");
-            $scope.properties.verticalAlign = $scope.$content.css("vertical-align");
-            $scope.properties.textDecoration = $scope.$content.css("text-decoration");
-            $scope.properties.webkitTransform = $scope.$content.css("-webkit-transform");
-          }
-          
           $scope.clickRemoveElement = function($event){
             console.log("clickRemoveElement", $scope.layer);
             layerService.remove($scope.layer.id);
@@ -80,25 +62,6 @@ mockupApp
                 .focusout($scope.blurTextElem)
                 .focus();
               $element.dblclick($scope.dblClickTextElem);
-          }
-          $scope.changeProperties = function(elem) {
-            var active = layerService.getActive();
-            if($scope.layer.id == active.id){
-              return $scope.properties;
-            } else {
-              return {
-                "color" : $scope.$content.css("color"),
-                "fontFamilly" : $scope.$content.css("font-familly"),
-                "fontSize" : $scope.$content.css("font-size"),
-                "lineHeight" : $scope.$content.css("line-height"),
-                "verticalAlign" : $scope.$content.css("vertical-align"),
-                "textDecoration" : $scope.$content.css("text-decoration"),
-                "borderStyle" : $scope.$content.css("border-style"),
-                "borderWidth": $scope.$content.css("border-width"),
-                "borderColor": $scope.$content.css("border-color"),
-                "webkitTransform": $scope.$content.css("webkit-transform")
-              }
-            }
           }
 
           $scope.initElemImage = function() {
@@ -168,11 +131,10 @@ mockupApp
           if( $scope.tool.name == "image"){
             $scope.initElemImage();
           }
-          $scope.setActive();
         },
         template : 
-        '<div class="elem elem-{{tool.type}} active" ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="clickElem($event)">' +
-          '<div class="elem-content" ng-transclude ng-style="changeProperties(this)">' +
+        '<div class="elem elem-{{tool.type}} {{layer.active}}" ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="clickElem($event)">' +
+          '<div class="elem-content" ng-transclude ng-style="layer.properties">' +
           '</div>' +
           '<div class="elem-footer">' +
             '<button ng-click="clickRemoveElement($event)" class="btn btn-remove">' +
@@ -182,14 +144,3 @@ mockupApp
         '</div>',
       }
   }]);
-
-angular.module('mockupApp').directive('ngBlur', ['$parse', function($parse) {
-  return function(scope, element, attr) {
-    var fn = $parse(attr['ngBlur']);
-    element.bind('blur', function(event) {
-      scope.$apply(function() {
-        fn(scope, {$event:event});
-      });
-    });
-  }
-}]);

@@ -1,8 +1,9 @@
 <form class="form-horizontal form-sm">
 	<div class="form-group">
 		<label class="control-label col-lg-4 font-sm" for="">color</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.color" />
+		<div lo-color-picker class="col-lg-8">
+			<ui-colorpicker ng-model="properties.color"></ui-colorpicker>
+			<input  class="form-control input-sm" type="text" ng-model="properties.color" />
 		</div>
 	</div>
 	<div class="form-group">

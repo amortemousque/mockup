@@ -12,6 +12,8 @@
     "angular-sanitize": "~1.0.7",
     "bootstrap": "~3.0.0",
     "jquery-ui": "~1.10.3"
+    "spectrum": "~"
+
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
