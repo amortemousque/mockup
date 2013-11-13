@@ -1,65 +1,50 @@
 <form class="form-horizontal form-sm">
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">Radius</label>
-		<div class="col-lg-8">
-			<ul class="list-inline list-input">
-				<li>
-					<input class="form-control input-sm" type="text" ng-model="properties.color" />
-				</li>
-				<li>			
-					<input class="form-control input-sm" type="text" ng-model="properties.color" />
-				</li>
-				<li>			
-					<input class="form-control input-sm" type="text" ng-model="properties.color" />
-				</li>
-				<li>			
-					<input class="form-control input-sm" type="text" ng-model="properties.color" />
-				</li>
-			</ul>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon input-sm">C</span>
+				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderTopLeftRadius">
+				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderTopRightRadius">
+				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderBottomLeftRadius">
+				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderBottomRightRadius">
+			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">Fill</label>
-		<div class="col-lg-8">
-			<ul class="list-inline list-input">
-				<li>
-					<input class="form-control input-sm" type="checkbox" ng-model="properties.textAlign" />
-				</li>
-				<li>
-					<input class="form-control input-sm" type="text" ng-model="properties.textAlign" />
-				</li>
-			</ul>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<label class="input-group-addon input-sm" for="">Fill</label>
+				<ui-colorpicker ng-model="properties.backgroundColor"></ui-colorpicker>
+				<input class="form-control input-sm" type="hidden" ng-model="properties.backgroundColor" />
+			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">Stroke</label>
-		<div class="col-lg-8">
-			<ul class="list-inline list-input">
-				<li>
-					<input class="form-control input-sm" type="checkbox" ng-model="properties.border" />
-				</li>
-				<li>
-					<input class="form-control input-sm" type="text" ng-model="properties.borderWidth" />
-				</li>
-				<li>			
-					<input class="form-control input-sm" type="text" ng-model="properties.borderStyle" />
-				</li>
-				<li>			
-					<input lo-color-picker class="form-control input-sm" type="text" ng-model="properties.borderColor" />
-				</li>
-			</ul>		
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<label class="input-group-addon input-sm">Stroke</label>
+				<input style="width:47px" class="form-control input-inline input-sm" type="number" ng-model="properties.borderWidth" />
+				<select ng-model="properties.borderStyle">
+					<option ng-repeat="stroke in strokes" value="{{stroke.css}}">{{stroke.name}}</option>
+				</select>
+				<ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
+				<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" />
+			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">W</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.width" />
-		</div>	
-	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">H</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.height" />
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon input-sm">W</span>
+				<input class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.width">
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group">
+				<label class="input-group-addon input-sm" for="">H</label>
+				<input class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.height">
+			</div>
 		</div>
 	</div>
+
 </form>

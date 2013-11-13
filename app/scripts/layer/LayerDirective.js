@@ -19,13 +19,14 @@ mockupApp
           }
 
           $scope.clickElem = function($event) {
+            $scope.layer.isActive(true);
             $event.stopPropagation();
           }
           $scope.dragElem = function(){
              activeTool = toolService.getActive();
               if(activeTool.type != "move"){
                 return false;
-              }
+              } 
           }
           $scope.resizeElem = function(){
             console.log("resize");
@@ -85,7 +86,7 @@ mockupApp
                 $scope.$img.show();
                 return false;
               }
-              $scope.$img = $("<img>").appendTo($scope.$content).css({"width" : "100%", "height": "100%"}).hide();
+              $scope.$img = $("<img ng-style='layer.properties'>").appendTo($scope.$content).css({"width" : "100%", "height": "100%"}).hide();
               $scope.$input = $("<input type='file'>")
                 .css({
                   "top": 0, 
@@ -97,33 +98,45 @@ mockupApp
               .appendTo($scope.$content).html("Valider");
               $element.dblclick($scope.dblClickTextElem); 
           }
-          
           $scope.tool = toolService.getActive();
           $scope.layer = layerService.getActive();
-          $scope.properties = layerService.getProperties();
+          
           $scope.$content = $($element.find(".elem-content"));
 
           canvasPosition = $("#canvas").offset();
           var topPosition =  window.mouseY - canvasPosition.top;
           var leftPosition =  window.mouseX - canvasPosition.left;
-
+          $scope.propertiesElem = {
+            top: topPosition,
+            left: leftPosition,
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0
+          }
+          $scope.$watch('layer.properties', function() {
+              $scope.propertiesElem.width = $scope.layer.properties.width + 2;
+              $scope.propertiesElem.height = $scope.layer.properties.height + 2;
+              $scope.propertiesElem.borderTopLeftRadius = $scope.layer.properties.borderTopLeftRadius;
+              $scope.propertiesElem.borderTopRightRadius = $scope.layer.properties.borderTopRightRadius;
+              $scope.propertiesElem.borderBottomLeftRadius = $scope.layer.properties.borderBottomLeftRadius;
+              $scope.propertiesElem.borderBottomRightRadius = $scope.layer.properties.borderBottomRightRadius;
+          }, true);
           var startX = 0, startY = 0, x = 0, y = 0;
           var paramsDraggable = { containment: "#canvas", scroll: false };
-          $element.css({
-             position: 'absolute',
-             top: topPosition,
-             left: leftPosition,
-             cursor: 'pointer',
-             width: 100,
-             height: 100
-           })
+
+          $element
           .resizable({
             resize: $scope.resizeElem
           })
           .draggable(
             { containment: "#canvas", 
               scroll: false,
-              drag: $scope.dragElem
+              drag: $scope.dragElem,
+              stop: function(event, ui) {
+                $scope.propertiesElem.top = ui.position.top; 
+                $scope.propertiesElem.left = ui.position.left;
+              }
           });
           if( $scope.tool.name == "text"){
             $scope.initElemText();
@@ -133,7 +146,9 @@ mockupApp
           }
         },
         template : 
-        '<div class="elem elem-{{tool.type}} {{layer.active}}" ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="clickElem($event)">' +
+        '<div class="elem elem-{{tool.type}} {{layer.active}}" ' +
+         'ng-style="propertiesElem" ' +
+         'ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="clickElem($event)">' +
           '<div class="elem-content" ng-transclude ng-style="layer.properties">' +
           '</div>' +
           '<div class="elem-footer">' +

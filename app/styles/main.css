@@ -1,6 +1,6 @@
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue";
     color: #333;
 }
 
@@ -74,6 +74,11 @@ List
     height: 30px;
     margin:0px;
 }
+
+.list-layer li {
+    position:absolute;
+    top:0px;
+}
 /*******************************
 Button
 ********************************/
@@ -100,6 +105,18 @@ Button
     background-color: #fff;
     z-index: 10000;
 }
+
+/*******************************
+Input
+********************************/
+
+.input-inline {
+    display: inline;
+} 
+
+.input-sm {
+    padding:0px 6px;
+}
 /*******************************
 Elements
 ********************************/
@@ -107,12 +124,25 @@ Elements
     color:#fff;
     position: absolute;
     z-index: 10;
+    cursor: pointer;
 }
 
+.elem .btn-remove {
+    display:none;
+}
 
+.elem.active .btn-remove, .elem:hover .btn-remove {
+    display:block;
+}
+
+.elem:hover {
+   box-shadow: 0px 0px 10px 0px rgba(229, 240, 248, 0.4);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(229, 240, 248, 0.4);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(229, 240, 248, 0.4); 
+}
 
 .elem.active {
-    border:1px solid red !important;
+    border:1px solid #e0eff9 !important;
 }
 
 .elem.elem-text textarea {

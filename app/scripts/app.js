@@ -3,7 +3,8 @@
 var mockupApp = angular.module('mockupApp',   [
   'ngCookies',
   'ngResource',
-  'ngSanitize'
+  'ngSanitize',
+  'ui'
 ])
   .config(function ($routeProvider) {
     $routeProvider

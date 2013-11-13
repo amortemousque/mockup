@@ -1,45 +1,40 @@
 <form class="form-horizontal form-sm">
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">color</label>
+	<div class="row form-group">
+		<div lo-color-picker class="col-lg-4">
+			<input class="form-control input-sm" type="number" ng-model="properties.fontSize" />
+		</div>
 		<div lo-color-picker class="col-lg-8">
+			<select ng-model="properties.fontFamily"><option ng-repeat="font in fonts" value="{{font.css}}">{{font.name}}</option> </select>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-4">
 			<ui-colorpicker ng-model="properties.color"></ui-colorpicker>
-			<input  class="form-control input-sm" type="text" ng-model="properties.color" />
+			<input  class="form-control input-sm" type="hidden" ng-model="properties.color" />
+		</div>
+		<div class="col-lg-8">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: properties.textAlign == 'left'};" ng-click="properties.textAlign = 'left'"><span class="glyphicon glyphicon-align-right"></span></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: properties.textAlign == 'center'};" ng-click="properties.textAlign = 'center'"><span class="glyphicon glyphicon-align-center"></span></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: properties.textAlign == 'right'};" btn-sm ng-click="properties.textAlign = 'right'"><span class="glyphicon glyphicon-align-left"></span></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: properties.textAlign == 'justify'};" ng-click="properties.textAlign = 'justify'"><span class="glyphicon glyphicon-align-justify"></span></button>
+			</div>
 		</div>
 	</div>
+	
 	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">font size</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.fontSize" />
+		<div class="col-lg-4">
+			<div class="input-group" style="width:20px">
+				<span class="input-group-addon input-sm"><i class="fa fa-text-height"></i></span>
+				<input style="width:40px;" class="input-inline form-control input-sm" type="number" ng-model="properties.lineHeight" />
+			</div>
+			<div></div>
 		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">font familly</label>
 		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.fontFamilly" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">text align</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.textAlign" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">line height</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.lineHeight" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">vertical align</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.verticalAlign" />
-		</div>	
-	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-4 font-sm" for="">text decoration</label>
-		<div class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="properties.textDecoration" />
+			<div class="btn-group">
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: properties.textDecoration == 'underline'};" ng-click="properties.textDecoration = 'underline'"><i class="fa fa-underline"></i></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: properties.textDecoration == 'line-through'};" ng-click="properties.textDecoration = 'line-through'"><i class="fa fa-strikethrough"></i></button>
+			</div>
 		</div>
 	</div>
 </form>

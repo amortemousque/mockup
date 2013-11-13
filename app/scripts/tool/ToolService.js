@@ -9,10 +9,18 @@ angular.module('mockupApp')
 	      {type: 'text', name:'text', img:'text-width', propertiesTemplate : "views/tool/propertiesText.html", status: "", isActive: false},
 	      {type: 'image', name:'image', img:'camera', propertiesTemplate : "views/tool/propertiesImage.html", status: "", isActive: false}
 	    ],
+
+	
+
+
 	this.template = {url : "views/tool/propertiesText.html"}
 
 	this.getAll = function() {
 	    return this.tools;
+	},
+
+	this.getAllFont = function() {
+	    return this.fonts;
 	},
 
 	this.getActive = function() {

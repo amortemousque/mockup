@@ -2,19 +2,15 @@ angular.module('mockupApp')
 .service('layerService', ['$http', function() {
 
 	this.layers = [],
-	this.activeLayer = {},
+	this.context = {layer: {}},
 
 	this.getAll = function($resource) {
         return this.layers;
     },
 
     this.getActive = function() {
-    	return this.activeLayer;
-	},
-
-  	this.getProperties = function() {
-    	return this.properties;
-	},
+    	return this.context.layer;
+	  },
 
   	this.add = function($layer) {
   		var id = 1;
@@ -27,11 +23,12 @@ angular.module('mockupApp')
   	},
 
   	this.setActive = function(layer) {
+      console.log("setActive");
   		for(var i = 0; i < this.layers.length; i++) {
-			this.layers[i].active = "";
-		}				
-		layer.active = "active";
-		this.activeLayer = layer;
+  			this.layers[i].active = "";
+  		}				
+  		layer.active = "active";
+  		this.context.layer = layer;
     },
 
   	this.remove = function(id) {
