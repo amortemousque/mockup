@@ -1,27 +1,23 @@
 'use strict';
 
 mockupApp
-  .controller('LayerCtrl', ['$scope', 'layerService', 'toolService',function ($scope, layerService, toolService) {
+  .controller('LayerCtrl', ['$scope', 'contextService', 'layerService',function ($scope, contextService, layerService) {
   	$scope.layers = layerService.getAll();
-    $scope.activeLayer = layerService.getActive();
-  	$scope.toolService = toolService;
+    $scope.context = contextService.getContext();
   	$scope.layerService = layerService;
     $scope.sortableOptions = {
       update: function(e, ui) { },
       axis: 'y'
     };
     $scope.addLayerOnCanvas = function(){
-    	var tool = $scope.toolService.getActive();
-
-    	if(tool != undefined && tool.type != "move" && tool.type != "resize") {
-    		var newLayer = {
-          type: tool.type, 
+    	if($scope.context.tool != undefined && $scope.context.tool.type != "move" && $scope.context.tool.type != "resize") {
+        var newLayer = {
+          type: $scope.context.tool.type, 
           isShow: true, 
-          active: "active",
-          isActive: function(bool){
-            if(bool == true) {
-                $scope.layerService.setActive(this);
-            }
+          isActive: true,
+          position: {
+            top: 0,
+            left: 0
           },
           properties: {
             color: "#fff",
@@ -40,7 +36,8 @@ mockupApp
           }
         };
 	  		$scope.layerService.add(newLayer);
-        layerService.setActive(newLayer)
+        contextService.setLayer(newLayer);
+        layerService.setActive(newLayer);
 	  	}
     }
  }]);

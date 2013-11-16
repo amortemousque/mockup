@@ -47,17 +47,26 @@ List
 .list-item-layers li {
     display: block;
     margin-top:3px;
-    padding: 3px 2px;
     line-height: 32px;
     vertical-align: middle;
 }
+ 
+.list-item-layers li.active{
+    background-color:#e0eff9;
+    outline: 1px solid #96D0F7;
+}
+
+.list-item-layers li div{
+    padding: 3px 2px;
+    height:29px;
+}
 .item-layer {
-    background-color: #ccc;
+    background-color: #eee;
     height:35px;
 }
 
 .item-layer a {
-    display: block;
+    display: inline-block;
 }
 .item-layer span {
     margin-left:10px;
@@ -117,6 +126,13 @@ Input
 .input-sm {
     padding:0px 6px;
 }
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: transparent;
+    border:none;
+    box-shadow:none;
+}
+
 /*******************************
 Elements
 ********************************/

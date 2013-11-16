@@ -4,7 +4,8 @@ var mockupApp = angular.module('mockupApp',   [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ui'
+  'ui',
+  '$strap.directives'
 ])
   .config(function ($routeProvider) {
     $routeProvider

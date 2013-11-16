@@ -1,5 +1,5 @@
 mockupApp
-  .directive('element', ["toolService", "layerService", function(toolService, layerService) {
+  .directive('element', ["contextService", "layerService", function(contextService, layerService) {
       return {
         restrict: 'E',
         transclude: true,
@@ -18,13 +18,19 @@ mockupApp
             $element.find(".btn-remove").addClass("hide");
           }
 
-          $scope.clickElem = function($event) {
-            $scope.layer.isActive(true);
-            $event.stopPropagation();
+          $scope.activeElem = function($event) {
+            console.log($scope.layer);
+            console.log("activeElem");
+            if($scope.context.tool.type == $scope.layer.type || $scope.context.tool.type == 'move') {
+              contextService.setLayer($scope.layer);
+              layerService.setActive($scope.layer);
+              $event.stopPropagation();
+            }
           }
+
           $scope.dragElem = function(){
-             activeTool = toolService.getActive();
-              if(activeTool.type != "move"){
+              //activeTool = contextService.getTool();
+              if($scope.context.tool.type != "move"){
                 return false;
               } 
           }
@@ -40,8 +46,8 @@ mockupApp
           
           $scope.initElemText = function(){
               $scope.dblClickTextElem = function(){
-                activeTool = toolService.getActive();
-                if(activeTool.type == $scope.layer.type){
+              //  activeTool = contextService.getTool();
+                if($scope.context.tool.type == $scope.layer.type){
                   $scope.$textarea.show().focus();
                   $scope.$text.hide();
                 }
@@ -98,9 +104,11 @@ mockupApp
               .appendTo($scope.$content).html("Valider");
               $element.dblclick($scope.dblClickTextElem); 
           }
-          $scope.tool = toolService.getActive();
-          $scope.layer = layerService.getActive();
-          
+
+          $scope.tool = contextService.getTool();
+          $scope.layer = contextService.getLayer();
+          $scope.context = contextService.getContext();
+
           $scope.$content = $($element.find(".elem-content"));
 
           canvasPosition = $("#canvas").offset();
@@ -133,9 +141,12 @@ mockupApp
             { containment: "#canvas", 
               scroll: false,
               drag: $scope.dragElem,
+              start: $scope.activeElem,
               stop: function(event, ui) {
                 $scope.propertiesElem.top = ui.position.top; 
                 $scope.propertiesElem.left = ui.position.left;
+                $scope.layer.position.top = ui.position.top; 
+                $scope.layer.position.left = ui.position.top;
               }
           });
           if( $scope.tool.name == "text"){
@@ -146,9 +157,9 @@ mockupApp
           }
         },
         template : 
-        '<div class="elem elem-{{tool.type}} {{layer.active}}" ' +
+        '<div class="elem elem-{{tool.type}}  ng-class:{\'active\' : layer.isActive } " ' +
          'ng-style="propertiesElem" ' +
-         'ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="clickElem($event)">' +
+         'ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="activeElem($event)">' +
           '<div class="elem-content" ng-transclude ng-style="layer.properties">' +
           '</div>' +
           '<div class="elem-footer">' +

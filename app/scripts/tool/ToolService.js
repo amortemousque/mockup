@@ -1,7 +1,6 @@
 angular.module('mockupApp')
-.service('toolService', ['$http', function() {
+.service('toolService', ['contextService', function() {
 
-	this.activeTool = undefined,
 	this.tools = [
 	      {type: 'move', name:'move', img:'arrow-up', propertiesTemplate : "", status: "", isActive: false},
 	      {type: 'shape', name:'shape', img:'unchecked', propertiesTemplate: "views/tool/propertiesShape.html", status: "", isActive: false},
@@ -11,8 +10,6 @@ angular.module('mockupApp')
 	    ],
 
 	
-
-
 	this.template = {url : "views/tool/propertiesText.html"}
 
 	this.getAll = function() {
@@ -22,28 +19,6 @@ angular.module('mockupApp')
 	this.getAllFont = function() {
 	    return this.fonts;
 	},
-
-	this.getActive = function() {
-		var active = undefined;
-        angular.forEach(this.tools, function(value, key){
-			if (value.isActive){
-				active = value;
-			}
-		});
-		return active;  
-    },
-
-  	this.setActive = function(name) {
-        angular.forEach(this.tools, function(value, key){
-			if(value.name == name) {
-				value.isActive = true;
-				value.status = "active";
-			} else {
-				value.isActive = false;
-				value.status = "";
-			}
-		});
-    }
 
     this.setPropertiesTemplate = function(template) {
         this.template.url = template;

@@ -12,12 +12,12 @@
 	  </div>
 
 	  <!-- Collect the nav links, forms, and other content for toggling -->
-	  <div class="collapse navbar-collapse navbar-ex1-collapse">
+	  <div ng-controller="MainCtrl" class="collapse navbar-collapse navbar-ex1-collapse">
 	    <ul class="nav navbar-nav">
 	      <li class="active dropdown">
 	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <b class="caret"></b></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="/" ng-click="newLayer()"><span class="glyphicon glyphicon-fileNew"></span> New</a></li>
+	          <li><a href="#" bs-modal="'views/newFile.html'" type="button" ><span class="glyphicon glyphicon-fileNew"></span> New</a></li>
 	          <li><a href="#"><span class="glyphicon glyphicon-fileNew"></span> Open</a></li>
 	          <li><a href="#"><span class="glyphicon glyphicon-fileNew"></span> Export</a></li>
 	        </ul>
@@ -34,7 +34,7 @@
 					  <div ng-controller="ToolCtrl" class="panel-body resize-vertical">
 					    <ul class="list-tools list-unstyled">
 							<li ng-repeat="tool in tools">
-								<button ng-click="activateTool(tool)" class="btn btn-tool ng-class:[tool.status]">
+								<button ng-click="activateTool(tool)" class="btn btn-tool ng-class:{'active' : tool.isActive}">
 							       <span class="glyphicon glyphicon-{{tool.img}}"></span>
 								</button>
 							</li>

@@ -8,4 +8,12 @@ mockupApp
        window.mouseX = e.pageX; 
        window.mouseY = e.pageY;
     }); 
+    $scope.newLayer = function(){
+  //   	console.log("test");
+  //   	$scope.modal = {
+		//   "content": "Hello Modal",
+		//   "saved": false
+		// }
+    }
+
   });

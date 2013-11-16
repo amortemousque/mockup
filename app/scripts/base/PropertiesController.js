@@ -1,9 +1,9 @@
 'use strict';
 
 mockupApp
-  .controller('PropertiesCtrl', ['$scope', 'layerService', 'toolService', function ($scope, layerService, toolService) {
+  .controller('PropertiesCtrl', ['$scope', 'contextService','layerService', 'toolService', function ($scope, contextService, layerService, toolService) {
   	$scope.layerService = layerService;
-	$scope.context = layerService.context;
+	$scope.context = contextService.getContext();
 	$scope.properties = {
 	    color: "#fff",
 	    textShadow: "",
@@ -53,7 +53,9 @@ mockupApp
     $scope.templateProperties = toolService.getPropertiesTemplate();
 
     $scope.$watch('context', function() {
-    	$scope.properties = $scope.context.layer.properties;
-    	console.log('context change', $scope.context.layer.properties);
+    	if($scope.context.layer != undefined ) {
+	    	$scope.properties = $scope.context.layer.properties;
+	    	console.log('context change', $scope.context.layer.properties);
+	   }
 	}, true);
  }]);
