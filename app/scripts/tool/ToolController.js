@@ -10,6 +10,6 @@ mockupApp
 			tool.isActive = false;
 		});
 		tool.isActive = true;
-		contextService.setTool(tool);
+		contextService.setSelectedTool(tool);
 	 };
   }]);

@@ -29,8 +29,7 @@
 			<div class="input-group">
 				<label class="input-group-addon input-sm">Stroke</label>
 				<input style="width:47px" class="form-control input-inline input-sm" type="number" ng-model="properties.borderWidth" />
-				<select ng-model="properties.borderStyle">
-					<option ng-repeat="stroke in strokes" value="{{stroke.css}}">{{stroke.name}}</option>
+				<select ng-model="form.stroke" ng-options="stroke.name for stroke in strokes">
 				</select>
 				<ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
 				<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" />

@@ -1,24 +1,12 @@
-'use strict';
+angular.module('mockupApp')
+.service('commonService', ['$http', function() {
+	this.units = [
+		{id:"px", type:"px", name: "Pixels"},
+		{id:"cm", type:"cm", name: "Centimeters"}
+	],
 
-mockupApp
-  .controller('PropertiesCtrl', ['$scope', 'contextService','layerService', 'toolService', function ($scope, contextService, layerService, toolService) {
-  	$scope.layerService = layerService;
-	$scope.context = contextService.getContext();
-	$scope.properties = {
-	    color: "#fff",
-	    textShadow: "",
-	    fontSize: 14,
-	    fontFamily: "Helvetica Neue",
-	    textAlign: "",
-	    lineHeight: 1,
-	    verticalAlign: "",
-	    textDecoration: "",
-	    webkitTransform: "",
-	    width: "",
-	    height: ""
-	},
 
-	$scope.fonts = [
+	this.fonts = [
 		{css: "Arial", name : "Arial"}, 
 		{css: "Arial Black", name : "Arial Black"}, 
 		{css: "Helvetica", name : "Helvetica"}, 
@@ -38,7 +26,7 @@ mockupApp
 	    {css: "Helvetica Neue", name: "Helvetica Neue"}
     ],
 
-    $scope.strokes = [
+    this.strokes = [
 	      {name:'none', css:'none', img : "", status: ""},
 	      {name:'dotted', css:'dotted', img: "", status: ""},
 	      {name:'dashed', css:'dashed', img: "",  status: ""},
@@ -50,12 +38,15 @@ mockupApp
 	      {name:'outset', css:'outset', img : "", status: ""}
 	    ],
 
-    $scope.templateProperties = toolService.getPropertiesTemplate();
+	this.getUnits = function(){
+		return this.units;
+	}
 
-    $scope.$watch('context', function() {
-    	if($scope.context.layer != undefined ) {
-	    	$scope.properties = $scope.context.layer.properties;
-	    	console.log('context change', $scope.context.layer.properties);
-	   }
-	}, true);
- }]);
+	this.getFonts = function(){
+		return this.fonts;
+	}
+
+	this.getStrokes = function(){
+		return this.strokes;
+	}
+}]);

@@ -4,7 +4,7 @@
 			<input class="form-control input-sm" type="number" ng-model="properties.fontSize" />
 		</div>
 		<div lo-color-picker class="col-lg-8">
-			<select ng-model="properties.fontFamily"><option ng-repeat="font in fonts" value="{{font.css}}">{{font.name}}</option> </select>
+			<select ng-model="form.font" ng-options="font.name for font in fonts"></select>
 		</div>
 	</div>
 	<div class="row form-group">

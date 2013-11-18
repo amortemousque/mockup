@@ -3,14 +3,14 @@ angular.module('mockupApp')
 
 	this.tools = [
 	      {type: 'move', name:'move', img:'arrow-up', propertiesTemplate : "", status: "", isActive: false},
-	      {type: 'shape', name:'shape', img:'unchecked', propertiesTemplate: "views/tool/propertiesShape.html", status: "", isActive: false},
-	      {type: 'resize', name:'resize', img:'fullscreen', propertiesTemplate: "views/tool/propertiesResize.html",  status: "", isActive: false},
-	      {type: 'text', name:'text', img:'text-width', propertiesTemplate : "views/tool/propertiesText.html", status: "", isActive: false},
-	      {type: 'image', name:'image', img:'camera', propertiesTemplate : "views/tool/propertiesImage.html", status: "", isActive: false}
+	      {type: 'shape', name:'shape', img:'unchecked', propertiesTemplate: "views/properties/propertiesShape.html", status: "", isActive: false},
+	      {type: 'resize', name:'resize', img:'fullscreen', propertiesTemplate: "views/properties/propertiesResize.html",  status: "", isActive: false},
+	      {type: 'text', name:'text', img:'text-width', propertiesTemplate : "views/properties/propertiesText.html", status: "", isActive: false},
+	      {type: 'image', name:'image', img:'camera', propertiesTemplate : "views/properties/propertiesImage.html", status: "", isActive: false}
 	    ],
 
 	
-	this.template = {url : "views/tool/propertiesText.html"}
+	this.template = {url : ""}
 
 	this.getAll = function() {
 	    return this.tools;

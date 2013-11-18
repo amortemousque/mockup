@@ -1,6 +1,7 @@
-<lu class="list-layer">
-	<li ng-repeat="layer in layers" data-type="{{layer.type}}" class="layer position-1 active">
-		<element>
-		</element>
+<ul class="list-tools list-unstyled">
+	<li ng-repeat="tool in tools">
+		<button ng-click="activateTool(tool)" class="btn btn-tool ng-class:{'active' : tool.isActive}">
+	       <span class="glyphicon glyphicon-{{tool.img}}"></span>
+		</button>
 	</li>
-</lu>
+</ul>

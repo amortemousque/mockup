@@ -10,6 +10,12 @@ Common
 
 .container {
     margin-top:60px;
+    max-width:2000px;
+}
+
+.container-canvas {
+    max-height: 700px;
+    overflow: scroll;
 }
 
 .side-menu {
@@ -24,7 +30,7 @@ Canvas
 }
 .canvas.canvas-main {
     width:100%;
-    height:1000px;
+    height:600px;
 }
 
 .canvas-darker {
@@ -190,5 +196,5 @@ Layers
 .layer {
     display:block;
     width:100%;
-    height:1000px;
+    height:600px;
 }

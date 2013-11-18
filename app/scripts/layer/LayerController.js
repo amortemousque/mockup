@@ -3,16 +3,17 @@
 mockupApp
   .controller('LayerCtrl', ['$scope', 'contextService', 'layerService',function ($scope, contextService, layerService) {
   	$scope.layers = layerService.getAll();
-    $scope.context = contextService.getContext();
+    $scope.selected = contextService.getSelected();
   	$scope.layerService = layerService;
+    $scope.canvas = contextService.getCanvas();
     $scope.sortableOptions = {
       update: function(e, ui) { },
       axis: 'y'
     };
     $scope.addLayerOnCanvas = function(){
-    	if($scope.context.tool != undefined && $scope.context.tool.type != "move" && $scope.context.tool.type != "resize") {
+    	if($scope.selected.tool != undefined && $scope.selected.tool.type != "move" && $scope.selected.tool.type != "resize") {
         var newLayer = {
-          type: $scope.context.tool.type, 
+          type: $scope.selected.tool.type, 
           isShow: true, 
           isActive: true,
           position: {
@@ -22,6 +23,7 @@ mockupApp
           properties: {
             color: "#fff",
             textShadow: "",
+            borderStyle: 'none',
             fontSize: 14,
             fontFamily: "Helvetica Neue",
             textAlign: "",
@@ -36,7 +38,7 @@ mockupApp
           }
         };
 	  		$scope.layerService.add(newLayer);
-        contextService.setLayer(newLayer);
+        contextService.setSelectedLayer(newLayer);
         layerService.setActive(newLayer);
 	  	}
     }

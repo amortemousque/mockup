@@ -8,7 +8,6 @@ mockupApp
         require: 'ngModel',
         link: function($scope, $element, attr, ngModel) {
           $scope.mouseFocusElem = function(){
-            console.log("mouseFocusElem");
               $element.find(".btn-remove").removeClass("hide");
               $("#field-style").val($element.attr("style"));
           }
@@ -19,10 +18,8 @@ mockupApp
           }
 
           $scope.activeElem = function($event) {
-            console.log($scope.layer);
-            console.log("activeElem");
-            if($scope.context.tool.type == $scope.layer.type || $scope.context.tool.type == 'move') {
-              contextService.setLayer($scope.layer);
+            if($scope.selected.tool.type == $scope.layer.type || $scope.selected.tool.type == 'move') {
+              contextService.setSelectedLayer($scope.layer);
               layerService.setActive($scope.layer);
               $event.stopPropagation();
             }
@@ -30,7 +27,7 @@ mockupApp
 
           $scope.dragElem = function(){
               //activeTool = contextService.getTool();
-              if($scope.context.tool.type != "move"){
+              if($scope.selected.tool.type != "move"){
                 return false;
               } 
           }
@@ -46,8 +43,7 @@ mockupApp
           
           $scope.initElemText = function(){
               $scope.dblClickTextElem = function(){
-              //  activeTool = contextService.getTool();
-                if($scope.context.tool.type == $scope.layer.type){
+                if($scope.selected.tool.type == $scope.layer.type){
                   $scope.$textarea.show().focus();
                   $scope.$text.hide();
                 }
@@ -72,11 +68,12 @@ mockupApp
           }
 
           $scope.initElemImage = function() {
-              $scope.dblClickTextElem = function(){
-                console.log("dblclickHandler",this);
-                $scope.$img.hide();
-                $scope.$submitImg.show().focus();
-                $scope.$input.show();
+              $scope.dblClickImgElem = function(){
+                if($scope.selected.tool.type == $scope.layer.type){
+                  $scope.$img.hide();
+                  $scope.$submitImg.show().focus();
+                  $scope.$input.show();
+                }
                 return false;
               }
               $scope.blurImageElem = function(){
@@ -102,12 +99,12 @@ mockupApp
               $scope.$submitImg = $("<button>")
               .click($scope.blurImageElem)
               .appendTo($scope.$content).html("Valider");
-              $element.dblclick($scope.dblClickTextElem); 
+              $element.dblclick($scope.dblClickImgElem); 
           }
 
-          $scope.tool = contextService.getTool();
-          $scope.layer = contextService.getLayer();
-          $scope.context = contextService.getContext();
+          $scope.tool = contextService.getSelectedTool();
+          $scope.layer = contextService.getSelectedLayer();
+          $scope.selected = contextService.getSelected();
 
           $scope.$content = $($element.find(".elem-content"));
 
