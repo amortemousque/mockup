@@ -10,7 +10,15 @@ mockupApp
       update: function(e, ui) { },
       axis: 'y'
     };
-    $scope.addLayerOnCanvas = function(){
+
+    $("#canvas")[0].addEventListener("dragover", function(e){e.preventDefault();}, true);
+    $("#canvas")[0].addEventListener("drop", function(e){
+      e.preventDefault(); 
+      $scope.addLayerOnCanvas(e.dataTransfer.files[0]);
+    }, true);
+
+    $scope.addLayerOnCanvas = function(imageSrc){
+      console.log("image drag");
     	if($scope.selected.tool != undefined && $scope.selected.tool.type != "move" && $scope.selected.tool.type != "resize") {
         var newLayer = {
           type: $scope.selected.tool.type, 
@@ -31,11 +39,19 @@ mockupApp
             verticalAlign: "",
             textDecoration: "",
             webkitTransform: "",
+            webkitFilter: "",
             width: 100,
             height: 100,
             top:0,
             left:0
-          }
+          },
+          filters: {
+             blur: 0,
+             lighten: 0,
+             brightness: 0,
+             contrast: 0,
+          },                  
+          imageSrc: imageSrc
         };
 	  		$scope.layerService.add(newLayer);
         contextService.setSelectedLayer(newLayer);

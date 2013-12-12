@@ -1,0 +1,14 @@
+<div class="elem elem-{{tool.type}} ng-class:{'active' : layer.isActive } " ng-style="propertiesElem"
+ ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="activeElem($event)">
+  <div class="elem-content ele-{{layer.type}}" ng-transclude ng-style="layer.properties" ng-switch="layer.type">
+	<div element-text ng-switch-when="text"></div>
+	<div element-image ng-switch-when="image"></div>
+	<div element-shape ng-switch-when="shape"></div>
+	<div ng-switch-default></div>
+  </div>
+  <div class="elem-footer">
+    <button ng-click="clickRemoveElement($event)" class="btn btn-remove">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+</div>

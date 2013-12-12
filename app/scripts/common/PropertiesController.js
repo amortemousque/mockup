@@ -7,7 +7,9 @@ mockupApp
 	$scope.fonts = commonService.getFonts();
     $scope.strokes = commonService.getStrokes();
     $scope.templateProperties = toolService.getPropertiesTemplate();
-
+    $scope.filters = {
+    	blur:0
+    };
 	$scope.properties = {
 	    color: "#fff",
 	    textShadow: "",
@@ -41,8 +43,10 @@ mockupApp
     });
 
     $scope.$watch('selected', function() {
-    	if($scope.selected.layer != undefined ) {
+    	if($scope.selected.layer != undefined) {
 	    	$scope.properties = $scope.selected.layer.properties;
+	    	$scope.filters = $scope.selected.layer.filters;
+
 	    	$scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
 	    	$scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
 	    	
