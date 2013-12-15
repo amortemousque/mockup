@@ -10,20 +10,7 @@ mockupApp
     $scope.filters = {
     	blur:0
     };
-	$scope.properties = {
-	    color: "#fff",
-	    textShadow: "",
-	    fontSize: 14,
-	    fontFamily: "Helvetica Neue",
-	    borderStyle: "none", 
-	    textAlign: "",
-	    lineHeight: 1,
-	    verticalAlign: "",
-	    textDecoration: "",
-	    webkitTransform: "",
-	    width: "",
-	    height: ""
-	};
+    $scope.properties = commonService.getProperties();
 
 	$scope.form = { 
 		font: $scope.fonts[0],
@@ -42,15 +29,12 @@ mockupApp
     	}	
     });
 
-    $scope.$watch('selected', function() {
+    $scope.$watch('selected.layer', function() {
     	if($scope.selected.layer != undefined) {
-	    	$scope.properties = $scope.selected.layer.properties;
-	    	$scope.filters = $scope.selected.layer.filters;
-
+    		console.log("test lqsdfbksjdbf", $scope.selected.layer.properties);
+		    $scope.properties = $scope.selected.layer.properties;
 	    	$scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
 	    	$scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
-	    	
-	    	console.log('context change', $scope.selected.layer.properties);
 	   }
-	}, true);
+	}, false);
  }]);

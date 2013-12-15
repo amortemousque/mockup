@@ -9,10 +9,16 @@ angular.module('mockupApp')
 		},
 		selected: {
 			tool: undefined, //tool usually used
-			layer: undefined //layer usually used
+			layer: undefined, //layer usually used
 		}
 	},
 
+
+
+	this.getSelectedTool = function(){
+		return this.file.selected.tool;
+	},
+	
 	this.getSelectedTool = function(){
 		return this.file.selected.tool;
 	},

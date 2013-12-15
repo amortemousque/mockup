@@ -11,6 +11,7 @@ mockupApp
             $scope.layer = contextService.getSelectedLayer();
             $scope.selected = contextService.getSelected();
             $scope.$content = $element.parent();
+            $scope.$container = $element.parent().parent();
             $scope.image = new Image();
 
             $scope.$content.append($scope.image); 
@@ -28,21 +29,26 @@ mockupApp
               var reader = new FileReader();
               reader.onload = function(e){
                 $scope.render(e.target.result);
+                $scope.$watch('layer.properties', function() {
+                   if ($scope.image.width != undefined) {
+                     $scope.image.width = $scope.layer.properties.width;
+                     $scope.image.height = $scope.layer.properties.height;
+                   }
+                }, true);
               };
               reader.readAsDataURL(src);
             }
 
             $scope.render = function(src){
                 $scope.image.src = src;
-                if( $scope.image.height > MAX_HEIGHT) {
-                  $scope.image.width *= MAX_HEIGHT / $scope.image.height;
-                  $scope.image.height = MAX_HEIGHT;
-                  $scope.layer.properties.width = $scope.image.width;
-                  $scope.layer.properties.height = $scope.image.height;
-                }
-                console.log("digest");
-                $scope.$digest();
-
+                 if( $scope.image.height > MAX_HEIGHT) {
+                   $scope.image.width *= MAX_HEIGHT / $scope.image.height;
+                   $scope.image.height = MAX_HEIGHT;
+                 }
+                $scope.layer.properties.width =  $scope.image.width;
+                $scope.layer.properties.height = $scope.image.height;
+                $scope.$apply();
+                console.log("image : width", $scope.image.width, "height", $scope.image.height);
             }
 
             $scope.$watch('layer.filters', function() {

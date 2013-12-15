@@ -1,7 +1,7 @@
 'use strict';
 
 mockupApp
-  .controller('LayerCtrl', ['$scope', 'contextService', 'layerService',function ($scope, contextService, layerService) {
+  .controller('LayerCtrl', ['$scope', '$modal', 'contextService', 'layerService', 'commonService',function ($scope, $modal, contextService, layerService, commonService) {
   	$scope.layers = layerService.getAll();
     $scope.selected = contextService.getSelected();
   	$scope.layerService = layerService;
@@ -14,7 +14,7 @@ mockupApp
     $("#canvas")[0].addEventListener("dragover", function(e){e.preventDefault();}, true);
     $("#canvas")[0].addEventListener("drop", function(e){
       e.preventDefault(); 
-      $scope.addLayerOnCanvas(e.dataTransfer.files[0]);
+      // $scope.addLayerOnCanvas(e.dataTransfer.files[0]);
     }, true);
 
     $scope.addLayerOnCanvas = function(imageSrc){
@@ -58,4 +58,13 @@ mockupApp
         layerService.setActive(newLayer);
 	  	}
     }
+
+    $scope.$watch('selected', function() {
+      if($scope.selected.layer != undefined) {
+              console.log('selected changed');
+
+        commonService.setProperties($scope.selected.layer.properties);
+  //      $scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
+     }
+  }, true);
  }]);

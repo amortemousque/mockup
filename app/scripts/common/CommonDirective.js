@@ -36,3 +36,30 @@ angular.module('mockupApp').directive('uiColorpicker', function() {
         }
     };
 });
+
+
+angular.module('mockupApp').directive('uiGradientpicker', function() {
+    return {
+        restrict: 'E',
+        require: 'ngModel',
+        scope: false,
+        replace: true,
+        template: "<div id='gradient'></div>",
+        link: function(scope, element, attrs, ngModel) {
+            console.log("model",ngModel);
+            var div = element.find('.gradient');
+
+            gradX('#gradient', {
+                code_shown: false,
+                change: function(stops, styles){
+                    // for(var i=0; i<styles.length; i++;)  { 
+                    //    // $("#some_div").css("background","styles[i]");
+                    // }
+                    scope.$apply(function() {
+                      ngModel.$setViewValue(styles[0]);
+                    });
+                }
+            });
+        }
+    };
+});

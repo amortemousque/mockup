@@ -1,5 +1,5 @@
 <ul ui-sortable ng-model="layers" class="list-item-layers list-unstyled">
-	<li ng-repeat="layer in layers" class="item-layer ng-class:{'active' : layer.isActive}" ng-click="activateLayer(layer)">
+	<li ng-repeat="layer in layers" class="item-layer ng-class:{'active' : layer.isActive}" ng-click="activateLayer(layer)"  ng-dblclick="openModal()">
 		<div class="pull-left">
 			<i class="fa ng-class:{'fa-eye': layer.isShow, 'fa-eye-slash': layer.isShow == false }" ng-click="showLayer(layer)"></i>
 		</div>		

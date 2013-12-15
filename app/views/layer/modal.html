@@ -1,0 +1,96 @@
+  <div class="modal-dialog modal-xxl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Layer style</h4>
+      </div>
+      <div class="modal-body">
+        <div class="nav-stacked" data-fade="1" ngModel="activeTab" bs-tabs>
+          <div data-title="Stroke">
+            <div class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Size</label>
+                  <div class="col-sm-9">
+                    <input class="form-control input-sm" type="text" ng-model="form.properties.borderWidth" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Style</label>
+                  <div class="col-sm-9">
+                    <select ng-model="form.stroke" ng-options="stroke.name for stroke in strokes">
+                    </select>                  
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Position</label>
+                  <div class="col-sm-9">
+                    <select ng-model="form.strokePosition" ng-options="pos.name for pos in strokePositions"></select>                  
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Opacity</label>
+                  <div class="col-sm-9">
+                    <input class="form-control input-sm" type="text" ng-model="form.strokeOpacity" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Color</label>
+                  <div class="col-sm-9">
+                    <ui-colorpicker ng-model="properties.backgroundColor"></ui-colorpicker>
+                    <input class="form-control input-sm" type="hidden" ng-model="form.properties.backgroundColor" />
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div data-title="Shadow">
+            <div class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Opacity</label>
+                  <div class="col-sm-9">
+                    <input class="form-control input-sm" type="text" ng-model="form.boxShadow.opacity" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Position</label>
+                  <div class="col-sm-9">
+                    <input class="form-control input-sm" type="text" ng-model="form.boxShadow.inset" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Angle</label>
+                   <div class="col-sm-4">
+                    <input class="form-control input-sm" type="text" ng-model="form.boxShadow.hpos" />
+                  </div>
+                  <div class="col-sm-5">
+                    <input class="form-control input-sm" type="text" ng-model="form.boxShadow.vpos" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Size</label>
+                  <div class="col-sm-9">
+                    <input class="form-control input-sm" type="text" ng-model="form.boxShadow.spread" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Blur</label>
+                  <div class="col-sm-9">
+                    <input class="form-control input-sm" type="text" ng-model="form.boxShadow.blur" />
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div data-title="Gradient overlay">
+            <div class="container-gradientpicker">
+                <ui-gradientpicker ng-model="form.properties.background"></ui-gradientpicker>
+                <input class="form-control input-sm" type="hidden" ng-model="form.properties.background" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="validateModification()">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
