@@ -51,7 +51,9 @@ angular.module('mockupApp')
 		webkitTransform: "",
 		width: "",
 		height: "",
-		outlineStyle: ""
+		outlineStyle: "none",
+		webkitBackgroundClip: "none",
+		boxShadow: "none"
 	 }
 
 	this.getUnits = function(){
@@ -89,9 +91,16 @@ angular.module('mockupApp')
 		target.width = source.width;
 		target.height = source.height;
 		target.outlineStyle =  source.outlineStyle;
-
-		if(source.background != undefined) {
-			target.background = source.background;
+		target.webkitBackgroundClip = source.webkitBackgroundClip;
+		target.webkitTextFillColor = source.webkitTextFillColor;
+		if(source.boxShadow != undefined) {
+			target.boxShadow = source.boxShadow;
+		}
+		if(source.textShadow != undefined) {
+			target.textShadow = source.textShadow;
+		}
+		if(source.backgroundImage != undefined) {
+			target.backgroundImage = source.backgroundImage;
 		}
 	}
 }]);

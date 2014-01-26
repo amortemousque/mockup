@@ -1,6 +1,7 @@
 angular.module('mockupApp')
 .service('contextService', ['$http', function() {
 	this.file = { //file usually charged
+		name: undefined,
 		layers: [],
 		canvas: {
 			width: undefined,
@@ -15,10 +16,6 @@ angular.module('mockupApp')
 
 
 
-	this.getSelectedTool = function(){
-		return this.file.selected.tool;
-	},
-	
 	this.getSelectedTool = function(){
 		return this.file.selected.tool;
 	},

@@ -4,7 +4,7 @@ mockupApp
         restrict: 'AE',
         transclude: true,
         scope: false,
-        replace: true,
+        replace: false,
         require: 'ngModel',
         controller: function($scope, $element) {
           console.log("init element base");
@@ -20,17 +20,16 @@ mockupApp
 
           $scope.activeElem = function($event) {
             console.log("event",$event);
-            if($scope.selected.tool.type == $scope.layer.type || $scope.selected.tool.type == 'move') {
-              console.log("start drag", $scope.layer);
+            if($scope.selected.tool.type == $scope.layer.type || $scope.selected.tool.type == 'move'|| $scope.selected.tool.type == 'resize') {
+              console.log("start drag", $event.type);
               contextService.setSelectedLayer($scope.layer);
               layerService.setActive($scope.layer);
-              if($event.type == "dragstart") {
+              if($event.type == "dragstart" ||  $event.type == "resizestart") {
                 $scope.$apply();
               }
-              $event.stopPropagation();
-            }
+            } 
+            $event.stopPropagation();
           }
-
 
           $scope.resizeElem = function(event, ui){
             console.log("resizeElem");
@@ -52,6 +51,7 @@ mockupApp
           $scope.$content = $($element.find(".elem-content"));
 
           var canvasPosition = $("#canvas").offset();
+          console.log("canvasPosition", canvasPosition);
           var topPosition =  window.mouseY - canvasPosition.top;
           var leftPosition =  window.mouseX - canvasPosition.left;
           $scope.propertiesElem = {
@@ -62,6 +62,7 @@ mockupApp
             borderBottomLeftRadius: 0,
             borderBottomRightRadius: 0
           }
+
           $scope.$watch('selected.layer.properties', function() {
               $scope.propertiesElem.width = $scope.layer.properties.width + 2;
               $scope.propertiesElem.height = $scope.layer.properties.height + 2;
@@ -75,17 +76,24 @@ mockupApp
 
           $element
           .resizable({
-            resize: $scope.resizeElem
+            start: $scope.activeElem,
+            resize: $scope.resizeElem,
+            disabled: true
           })
           .draggable(
             { containment: "#canvas", 
               scroll: false,
+              disabled: true,
               start: $scope.activeElem,
               stop: function(event, ui) {
+                console.log("stop drag", ui.position.top);
+                console.log("stop drag", $scope.layer);
                 $scope.propertiesElem.top = ui.position.top; 
                 $scope.propertiesElem.left = ui.position.left;
                 $scope.layer.position.top = ui.position.top; 
-                $scope.layer.position.left = ui.position.top;
+                $scope.layer.position.left = ui.position.left;
+                $scope.$apply();
+
               }
           });
           $scope.element = $element;
@@ -101,7 +109,6 @@ mockupApp
               $scope.element.draggable('enable');
             }
           });
-         // $("<div element-" + $scope.layer.type + ">").appendTo($scope.$content);
         },
         templateUrl : '/views/element/elementBase.html'
       }

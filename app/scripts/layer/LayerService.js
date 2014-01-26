@@ -1,5 +1,11 @@
 angular.module('mockupApp')
-.service('layerService', ['contextService', function(contextService) {
+.service('layerService', ['$resource', 'contextService', function($resource, contextService) {
+
+  this.Layers = $resource('http://localhost:port/layers/:id', {port: ':3000'},
+  {
+      'update': { method:'PUT' },
+      'save': {method: 'POST', isArray: true }
+  });
 
   this.layers = contextService.file.layers,
 
@@ -31,6 +37,22 @@ angular.module('mockupApp')
       layer.isActive = false;
     });
     layer.isActive = true;
+  }
+
+  this.getAllByMockupId = function(mockupId) {
+    var layers = this.Layers.query({mockupId:mockupId});
+    return layers;
+  },
+
+  this.save = function(layers) {
+    console.log("save", layers);
+    // if (mockup._id != undefined) {
+    //  this.Mockup.update({ id:$id }, mockup);
+    // } else {
+    var layers = this.Layers.save(layers); 
+    return layers;
+
+    // } 
   }
 
 }])

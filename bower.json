@@ -2,7 +2,7 @@
   "name": "mockup",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.0.7",
+    "angular": "~1.2.1",
     "json3": "~3.2.4",
     "jquery": "jquery#2",
     "bootstrap-sass": "~3.0.0",

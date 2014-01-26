@@ -1,6 +1,7 @@
 'use strict';
 
 var mockupApp = angular.module('mockupApp',   [
+  'ngRoute',
   'ngCookies',
   'ngResource',
   'ngSanitize',

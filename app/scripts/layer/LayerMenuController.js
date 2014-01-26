@@ -18,7 +18,15 @@ var LayerMenuCtrl = angular.module('mockupApp')
       properties: commonService.getProperties(),
       font: $scope.fonts[0],
       stroke: $scope.strokes[0],
-      strokePosition : $scope.strokePositions[0]
+      strokePosition : $scope.strokePositions[0],
+      boxShadow: {
+        color: "#000000",
+        inset: false,
+        hpos: 10,
+        vpos: 10,
+        blur: 10,
+        spread: 1
+      }
     }
 
     $scope.modalPromise = $modal({template: 'views/layer/modal.html', persist: true, backdrop: 'static', show: false, scope: $scope});
@@ -55,7 +63,25 @@ var LayerMenuCtrl = angular.module('mockupApp')
           $scope.selected.layer.properties.outlineStyle = 'none';
         }
       }
+      if ($scope.selected.layer.type == "text") {
+          $scope.form.properties.webkitBackgroundClip = "text";
+          $scope.form.properties.webkitTextFillColor = "transparent";
+      } else if($scope.selected.layer.type == "image") {
+          $scope.form.properties.backgroundImage = "none";
+      }
+      if($scope.form.boxShadow != undefined) {
+        var inset = "";
+        if($scope.form.boxShadow.inset == true){
+          inset = "inset";
+        } 
+        if ($scope.selected.layer.type == "text") {
+          $scope.form.properties.textShadow = $scope.form.boxShadow.hpos + "px " + $scope.form.boxShadow.vpos + "px " + $scope.form.boxShadow.blur + "px " + $scope.form.boxShadow.color;
+        } else {
+          $scope.form.properties.boxShadow = $scope.form.boxShadow.hpos + "px " + $scope.form.boxShadow.vpos + "px " + $scope.form.boxShadow.blur + "px " + $scope.form.boxShadow.spread + "px " + $scope.form.boxShadow.color + " " + inset;
+        }
+      }
       commonService.mapProperties($scope.form.properties, $scope.selected.layer.properties);
+      console.log("qsldlqsjd", $scope.selected.layer.properties);
       $q.when($scope.modalPromise).then(function(modalEl) {
           modalEl.modal('hide');
       });
