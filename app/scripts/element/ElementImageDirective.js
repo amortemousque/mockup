@@ -7,12 +7,11 @@ mockupApp
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-          console.log("init image");
             $scope.layer = contextService.getSelectedLayer();
             $scope.selected = contextService.getSelected();
-            $scope.$content = $element.parent();
-            $scope.$container = $element.parent().parent();
+            $scope.$content = $element.parent().parent();
             $scope.image = new Image();
+          console.log("init image", $scope.$content[0]);
 
             $scope.$content.append($scope.image); 
             $($scope.image).addClass("image");
@@ -47,6 +46,9 @@ mockupApp
                  }
                 $scope.layer.properties.width =  $scope.image.width;
                 $scope.layer.properties.height = $scope.image.height;
+                $scope.$content.parent().css("width", $scope.image.width + 1);
+                $scope.$content.parent().css("height", $scope.image.height + 1)
+
                 $scope.$apply();
                 console.log("image : width", $scope.image.width, "height", $scope.image.height);
             }
@@ -66,6 +68,10 @@ mockupApp
               e.preventDefault(); 
               $scope.loadImage(e.dataTransfer.files[0]);
             }, true);
-        }
+        },
+        templateUrl : '/views/element/elementImage.html'
+
+
       }
+
   }]);

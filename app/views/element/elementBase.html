@@ -1,4 +1,4 @@
-<div class="elem elem-{{tool.type}} ng-class:{'active' : layer.isActive } " ng-style="propertiesElem"
+<div class="elem ng-class:{'active' : layer.isActive } " ng-style="propertiesElem"
  ng-blur="mouseBlurElem()"  ng-focus="mouseFocusElem()" ng-click="activeElem($event)">
   <div class="elem-content ele-{{layer.type}}"  ng-style="layer.properties" ng-switch="layer.type">
 	<div ng-switch-when="text"><div element-text></div></div>

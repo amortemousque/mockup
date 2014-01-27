@@ -7,7 +7,7 @@ mockupApp
         replace: false,
         require: 'ngModel',
         controller: function($scope, $element) {
-          console.log("init element base");
+          console.log("init element base", $element);
           $scope.mouseFocusElem = function(){
               $element.find(".btn-remove").removeClass("hide");
               $("#field-style").val($element.attr("style"));
@@ -81,15 +81,13 @@ mockupApp
             disabled: true
           })
           .draggable(
-            { containment: "#canvas", 
+            { 
+              containment: "#cavans", 
               scroll: false,
               disabled: true,
               start: $scope.activeElem,
               stop: function(event, ui) {
-                console.log("stop drag", ui.position.top);
-                console.log("stop drag", $scope.layer);
-                $scope.propertiesElem.top = ui.position.top; 
-                $scope.propertiesElem.left = ui.position.left;
+                console.log("stop drag", ui);
                 $scope.layer.position.top = ui.position.top; 
                 $scope.layer.position.left = ui.position.left;
                 $scope.$apply();

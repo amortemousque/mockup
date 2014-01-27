@@ -13,6 +13,31 @@ mockupApp
   			}
   		};
 
+
+      // Show a basic modal from a controller
+    //  var myModal = $modal({title: 'My Title', content: 'My Content', show: true});
+
+      // Pre-fetch an external template populated with a custom scope
+      $scope.modalOpenFile = $modal({scope: $scope, template: 'views/file/openFile.html', show: false});
+      $scope.modalNewFile = $modal({scope: $scope, template: 'views/file/newFile.html', show: false});
+      $scope.modalSaveAs = $modal({scope: $scope, template: 'views/file/saveFile.html', show: false});
+
+      $scope.openModal = function(modalName){
+          if(modalName == "newFile")
+            $scope.modalNewFile.show();
+          if(modalName == "openFile")
+            $scope.modalOpenFile.show();
+          if(modalName == "saveAs")
+            $scope.modalSaveAs.show();
+      }
+
+   //   $scope.modalOpenFile = $modal({scope: $scope, template: 'views/file/openFile.html', show: true});
+
+      // Show when some event occurs (use $promise property to ensure the template has been loaded)
+      // modelOpenFile.$promise.then(function() {
+      //   myOtherModal.show();
+      // })
+
       $scope.exportFile = function($event){
         // var data = {a:1, b:2, c:3};
         // var json = JSON.stringify(data);
@@ -38,7 +63,7 @@ mockupApp
 	  		contextService.file.canvas.width = $scope.file.canvas.width;
 	  		contextService.file.canvas.height = $scope.file.canvas.height;
 	  		contextService.file.canvas.unit = $scope.file.canvas.unit;
-       // $event.stopPropagation();
+        $event.stopPropagation();
   		};
 
       $scope.saveFile = function($event, modal){
@@ -58,6 +83,7 @@ mockupApp
         }, log);
 
         layerService.save(layers);
+        $event.stopPropagation();
 
       };
 
@@ -76,6 +102,7 @@ mockupApp
           });
         });
        // contextService.file.layers = layers;
+        $event.stopPropagation();
 
       }
   }]);
