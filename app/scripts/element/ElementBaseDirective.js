@@ -3,10 +3,11 @@ mockupApp
       return {
         restrict: 'AE',
         transclude: true,
-        scope: false,
+        //scope: false,
         replace: false,
         require: 'ngModel',
         controller: function($scope, $element) {
+          console.log("layer de la mort : ",$scope.layer);
           console.log("init element base", $element);
           $scope.mouseFocusElem = function(){
               $element.find(".btn-remove").removeClass("hide");
@@ -41,8 +42,7 @@ mockupApp
           }
 
           $scope.clickRemoveElement = function($event){
-            console.log("clickRemoveElement", $scope.layer);
-            layerService.remove($scope.layer.id);
+            layerService.remove($scope.layer);
             $event.stopPropagation();
           }
           
@@ -50,13 +50,9 @@ mockupApp
 
           $scope.$content = $($element.find(".elem-content"));
 
-          var canvasPosition = $("#canvas").offset();
-          console.log("canvasPosition", canvasPosition);
-          var topPosition =  window.mouseY - canvasPosition.top;
-          var leftPosition =  window.mouseX - canvasPosition.left;
           $scope.propertiesElem = {
-            top: topPosition,
-            left: leftPosition,
+            top: $scope.layer.position.top,
+            left: $scope.layer.position.left,
             borderTopLeftRadius: 0,
             borderTopRightRadius: 0,
             borderBottomLeftRadius: 0,
@@ -96,12 +92,12 @@ mockupApp
           });
           $scope.element = $element;
           $scope.$watch('selected.tool', function(tool) {
-            if($scope.selected.tool.type != "resize"){
+            if($scope.selected.tool != undefined && $scope.selected.tool.type != "resize"){
               $scope.element.resizable('disable');
             } else {
               $scope.element.resizable('enable');
             }
-            if($scope.selected.tool.type != "move"){
+            if($scope.selected.tool != undefined && $scope.selected.tool.type != "move"){
               $scope.element.draggable('disable');
             } else {
               $scope.element.draggable('enable');

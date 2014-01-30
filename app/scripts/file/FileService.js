@@ -8,8 +8,6 @@ angular.module('mockupApp')
 
   this.getAll = function() {
       var mockups = this.Mockups.query();
-          console.log("getAll", mockups);
-
       return mockups;
   },
 

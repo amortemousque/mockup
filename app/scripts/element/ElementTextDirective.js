@@ -3,13 +3,11 @@ mockupApp
       return {
         restrict: 'AE',
         transclude: true,
-        scope: false,
+       // scope: false,
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-          console.log("init element text");
           $scope.tool = contextService.getSelectedTool();
-          $scope.layer = contextService.getSelectedLayer();
           $scope.selected = contextService.getSelected();
 
          // $scope.$content = $element.parent();
@@ -23,19 +21,24 @@ mockupApp
           }
           $scope.blurTextElem = function(){
             console.log("blurTextElem");
-            $scope.$text.html($scope.$textarea.val()).show();
+            $scope.$text.show();
             $scope.$textarea.hide();
+            //$scope.layer.content = $scope.$textarea.val();
+           // $scope.$apply();
             return false;
           }
-          $scope.$text = $("<p>").appendTo($scope.$content);
-          $scope.$textarea = $("<textarea>")
+          $scope.$text = $scope.$content.find("p");
+          $scope.$textarea = $scope.$content.find("textarea")
             .css({
               "top": 0, 
               "left": 0})
-            .appendTo($scope.$content)
             .addClass("form-control")
             .focusout($scope.blurTextElem)
             .focus();
+
+          // if($scope.layer.content != undefined){
+          //   $scope.$textarea.text($scope.layer.content);
+          // }
           $scope.$content.dblclick($scope.dblClickTextElem);
         },
         templateUrl : '/views/element/elementText.html'

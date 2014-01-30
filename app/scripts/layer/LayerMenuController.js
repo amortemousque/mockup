@@ -9,6 +9,7 @@ var LayerMenuCtrl = angular.module('mockupApp')
     $scope.strokes = commonService.getStrokes();
 
     $scope.properties = commonService.getProperties();
+    $scope.modalPromise = $modal({scope: $scope, template: 'views/layer/modal.html', show: false});
 
     $scope.strokePositions = [
       {id:"outline", name:"Outline"},
@@ -29,8 +30,6 @@ var LayerMenuCtrl = angular.module('mockupApp')
       }
     }
 
-    $scope.modalPromise = $modal({template: 'views/layer/modal.html', persist: true, backdrop: 'static', show: false, scope: $scope});
-
   	$scope.activateLayer = function(layer){
   		layerService.setActive(layer);
   		contextService.setSelectedLayer(layer);
@@ -50,9 +49,7 @@ var LayerMenuCtrl = angular.module('mockupApp')
           $scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
           $scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
        }
-       $q.when($scope.modalPromise).then(function(modalEl) {
-          modalEl.modal('show');
-        });
+       $scope.modalPromise.show();
     };
 
     $scope.validateModification = function() {
@@ -81,10 +78,7 @@ var LayerMenuCtrl = angular.module('mockupApp')
         }
       }
       commonService.mapProperties($scope.form.properties, $scope.selected.layer.properties);
-      console.log("qsldlqsjd", $scope.selected.layer.properties);
-      $q.when($scope.modalPromise).then(function(modalEl) {
-          modalEl.modal('hide');
-      });
+      $scope.modalPromise.hide();
     };
 }]);
 

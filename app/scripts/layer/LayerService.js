@@ -7,6 +7,11 @@ angular.module('mockupApp')
       'save': {method: 'POST', isArray: true }
   });
 
+  this.MockupLayers = $resource('http://localhost:port/mockupLayers/:id', {port: ':3000'},
+  {
+      'update': { method:'PUT' },
+  });
+
   this.layers = contextService.file.layers,
 
   this.getAll = function($resource) {
@@ -14,22 +19,11 @@ angular.module('mockupApp')
   },
 
   this.add = function(layer) {
-  	var id = 1;
-  	if (this.layers.length != 0){
-  		id = this.layers[this.layers.length - 1].id;
-  	} 
-  	layer.id = id+1;
   	contextService.file.layers.push(layer);
   },
 
-  this.remove = function(id) {
-    console.log(id);
-    var length = this.layers.length;
-    for(var i = 0; i < length; i++) {
-      if(this.layers[i].id == id) {
-        this.layers.splice(i, 1);
-      }
-    }
+  this.remove = function(layer) {
+    this.layers.splice(this.layers.indexOf(layer), 1);
   },
   
   this.setActive = function(layer) {
@@ -40,19 +34,14 @@ angular.module('mockupApp')
   }
 
   this.getAllByMockupId = function(mockupId) {
-    var layers = this.Layers.query({mockupId:mockupId});
+    var layers = this.MockupLayers.query({id: mockupId});
     return layers;
   },
 
   this.save = function(layers) {
-    console.log("save", layers);
-    // if (mockup._id != undefined) {
-    //  this.Mockup.update({ id:$id }, mockup);
-    // } else {
+    console.log("save layers", layers);
     var layers = this.Layers.save(layers); 
     return layers;
-
-    // } 
   }
 
 }])
