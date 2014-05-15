@@ -43,23 +43,26 @@ angular.module('mockupApp').directive('uiGradientpicker', function() {
         restrict: 'E',
         require: 'ngModel',
         scope: false,
-        replace: true,
+        replace: false,
         template: "<div id='gradient'></div>",
         link: function(scope, element, attrs, ngModel) {
             console.log("model",ngModel);
-            var div = element.find('.gradient');
+            var div = element.find('#gradient');
+            console.log("div cool", div);
+            setTimeout(function(){
+                gradX('#gradient', {
+                    code_shown: false,
+                    change: function(stops, styles){
+                        // for(var i=0; i<styles.length; i++;)  { 
+                        //    // $("#some_div").css("background","styles[i]");
+                        // }
+                        scope.$apply(function() {
+                          ngModel.$setViewValue(styles[0]);
+                        });
+                    }
+                });
+            },500);
 
-            gradX('#gradient', {
-                code_shown: false,
-                change: function(stops, styles){
-                    // for(var i=0; i<styles.length; i++;)  { 
-                    //    // $("#some_div").css("background","styles[i]");
-                    // }
-                    scope.$apply(function() {
-                      ngModel.$setViewValue(styles[0]);
-                    });
-                }
-            });
         }
     };
 });

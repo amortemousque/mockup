@@ -1,5 +1,5 @@
 mockupApp
-  .directive('elementImage', ["contextService", "layerService", function(contextService, layerService) {
+  .directive('elementImage', ["context", "layerService", function(context, layerService) {
       return {
         restrict: 'AE',
         transclude: true,
@@ -7,9 +7,7 @@ mockupApp
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-           console.log("layers de la merde 2", $scope.layer);
-            console.log("content", $scope.$content);
-            $scope.selected = contextService.getSelected();
+            
             $scope.$content = $element.parent().parent();
             $scope.fileupload = $scope.$content.find('.fileupload');
             $scope.image = $scope.$content.find(".picture");

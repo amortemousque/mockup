@@ -1,7 +1,7 @@
 'use strict';
 
 mockupApp
-  .controller('ToolCtrl', ['$scope', 'contextService', 'toolService', function ($scope, contextService, toolService) {
+  .controller('ToolCtrl', ['$scope', 'context', 'toolService', function ($scope, context, toolService) {
     $scope.tools = toolService.getAll();
     $scope.fonts = toolService.getAllFont();
     $scope.activateTool = function(tool) {
@@ -10,6 +10,6 @@ mockupApp
 			tool.isActive = false;
 		});
 		tool.isActive = true;
-		contextService.setSelectedTool(tool);
+		context.tool = tool;
 	 };
   }]);

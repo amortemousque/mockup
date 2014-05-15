@@ -1,10 +1,10 @@
 'use strict';
 
 var LayerMenuCtrl = angular.module('mockupApp')
-  .controller('LayerMenuCtrl', ['$scope', '$modal', '$filter', '$q', 'contextService', 'layerService', 'toolService', 'commonService', function ($scope, $modal, $filter, $q, contextService, layerService, toolService, commonService) {
+  .controller('LayerMenuCtrl', ['$scope', '$modal', '$filter', '$q', 'context', 'layerService', 'toolService', 'commonService', function ($scope, $modal, $filter, $q, context, layerService, toolService, commonService) {
   	$scope.layers = layerService.getAll();
   	$scope.activeClass = "active";
-    $scope.selected = contextService.getSelected();
+  //  $scope.selected = contextService.getSelected();
     $scope.fonts = commonService.getFonts();
     $scope.strokes = commonService.getStrokes();
 
@@ -32,7 +32,7 @@ var LayerMenuCtrl = angular.module('mockupApp')
 
   	$scope.activateLayer = function(layer){
   		layerService.setActive(layer);
-  		contextService.setSelectedLayer(layer);
+      context.layer = layer;
   	}
 
   	$scope.showLayer = function(layer){
@@ -44,8 +44,8 @@ var LayerMenuCtrl = angular.module('mockupApp')
   	}
 
     $scope.openModal = function () {
-       if($scope.selected.layer != undefined) {
-          $scope.form.properties = jQuery.extend(true, {}, $scope.selected.layer.properties); //clone l'emen propriete
+       if(context.layer != undefined) {
+          $scope.form.properties = jQuery.extend(true, {}, context.layer.properties); //clone l'emen propriete
           $scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
           $scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
        }
@@ -53,17 +53,17 @@ var LayerMenuCtrl = angular.module('mockupApp')
     };
 
     $scope.validateModification = function() {
-      if($scope.selected.layer != undefined ){
+      if(context.layer != undefined ){
         if($scope.strokePositions.id == 'outline'){
-          $scope.selected.layer.properties.borderStyle = 'none';
+          context.layer.properties.borderStyle = 'none';
         } else {
-          $scope.selected.layer.properties.outlineStyle = 'none';
+          context.layer.properties.outlineStyle = 'none';
         }
       }
-      if ($scope.selected.layer.type == "text") {
+      if (context.layer.type == "text") {
           $scope.form.properties.webkitBackgroundClip = "text";
           $scope.form.properties.webkitTextFillColor = "transparent";
-      } else if($scope.selected.layer.type == "image") {
+      } else if(context.layer.type == "image") {
           $scope.form.properties.backgroundImage = "none";
       }
       if($scope.form.boxShadow != undefined) {
@@ -71,13 +71,13 @@ var LayerMenuCtrl = angular.module('mockupApp')
         if($scope.form.boxShadow.inset == true){
           inset = "inset";
         } 
-        if ($scope.selected.layer.type == "text") {
+        if (context.layer.type == "text") {
           $scope.form.properties.textShadow = $scope.form.boxShadow.hpos + "px " + $scope.form.boxShadow.vpos + "px " + $scope.form.boxShadow.blur + "px " + $scope.form.boxShadow.color;
         } else {
           $scope.form.properties.boxShadow = $scope.form.boxShadow.hpos + "px " + $scope.form.boxShadow.vpos + "px " + $scope.form.boxShadow.blur + "px " + $scope.form.boxShadow.spread + "px " + $scope.form.boxShadow.color + " " + inset;
         }
       }
-      commonService.mapProperties($scope.form.properties, $scope.selected.layer.properties);
+      commonService.mapProperties($scope.form.properties, context.layer.properties);
       $scope.modalPromise.hide();
     };
 }]);

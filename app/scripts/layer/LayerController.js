@@ -1,11 +1,10 @@
 'use strict';
 
 mockupApp
-  .controller('LayerCtrl', ['$scope', '$modal', 'contextService', 'layerService', 'commonService',function ($scope, $modal, contextService, layerService, commonService) {
+  .controller('LayerCtrl', ['$scope', '$modal', 'context', 'layerService', 'commonService',function ($scope, $modal, context, layerService, commonService) {
   	$scope.layers = layerService.getAll();
-    $scope.selected = contextService.getSelected();
   	$scope.layerService = layerService;
-    $scope.canvas = contextService.getCanvas();
+    $scope.canvas = context.mockup.canvas;
     $scope.sortableOptions = {
       update: function(e, ui) { },
       axis: 'y'
@@ -18,12 +17,12 @@ mockupApp
 
     $scope.addLayerOnCanvas = function(){
       console.log("image drag");
-    	if($scope.selected.tool != undefined && $scope.selected.tool.type != "move" && $scope.selected.tool.type != "resize") {
+    	if(context.tool != undefined && context.tool.type != "move" && context.tool.type != "resize") {
         var canvasPosition = $("#canvas").offset();
-          var topPosition =  window.mouseY - canvasPosition.top;
-          var leftPosition =  window.mouseX - canvasPosition.left;
+        var topPosition =  window.mouseY - canvasPosition.top;
+        var leftPosition =  window.mouseX - canvasPosition.left;
         var newLayer = {
-          type: $scope.selected.tool.type, 
+          type: context.tool.type, 
           isShow: true, 
           isActive: true,
           position: {
@@ -54,14 +53,14 @@ mockupApp
           content: undefined
         };
 	  		$scope.layerService.add(newLayer);
-        contextService.setSelectedLayer(newLayer);
+        context.layer = newLayer;
         layerService.setActive(newLayer);
 	  	}
     }
 
-    $scope.$watch('selected', function() {
-      if($scope.selected.layer != undefined) {
-        commonService.setProperties($scope.selected.layer.properties);
+    $scope.$watch('context.layer', function() {
+      if(context.layer != undefined) {
+        commonService.setProperties(context.layer.properties);
   //      $scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
      }
   }, true);

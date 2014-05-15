@@ -1,5 +1,5 @@
 angular.module('mockupApp')
-.service('toolService', ['contextService', function() {
+.service('toolService', ['context', function() {
 
 	this.tools = [
 	      {type: 'move', name:'move', img:'arrow-up', propertiesTemplate : "", status: "", isActive: false},

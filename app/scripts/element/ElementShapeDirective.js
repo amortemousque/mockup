@@ -1,5 +1,5 @@
 mockupApp
-  .directive('elementShape', ["contextService", "layerService", function(contextService, layerService) {
+  .directive('elementShape', ["context", "layerService", function(context, layerService) {
       return {
         restrict: 'AE',
         transclude: true,
@@ -7,9 +7,8 @@ mockupApp
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-          $scope.tool = contextService.getSelectedTool();
-          $scope.layer = contextService.getSelectedLayer();
-          $scope.selected = contextService.getSelected();
+          $scope.tool = context.tool;
+          $scope.layer = context.layer;
         }
       }
   }]);

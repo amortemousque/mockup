@@ -1,5 +1,5 @@
 angular.module('mockupApp')
-.service('layerService', ['$resource', 'contextService', function($resource, contextService) {
+.service('layerService', ['$resource', 'context', function($resource, context) {
 
   this.Layers = $resource('http://localhost:port/layers/:id', {port: ':3000'},
   {
@@ -12,22 +12,21 @@ angular.module('mockupApp')
       'update': { method:'PUT' },
   });
 
-  this.layers = contextService.file.layers,
 
   this.getAll = function($resource) {
-      return contextService.file.layers;
+      return context.layers;
   },
 
   this.add = function(layer) {
-  	contextService.file.layers.push(layer);
+  	context.layers.push(layer);
   },
 
   this.remove = function(layer) {
-    this.layers.splice(this.layers.indexOf(layer), 1);
+    context.layers.splice(context.layers.indexOf(layer), 1);
   },
   
   this.setActive = function(layer) {
-    angular.forEach(this.layers , function(layer, key){
+    angular.forEach(context.layers , function(layer, key){
       layer.isActive = false;
     });
     layer.isActive = true;
@@ -36,6 +35,11 @@ angular.module('mockupApp')
   this.getAllByMockupId = function(mockupId) {
     var layers = this.MockupLayers.query({id: mockupId});
     return layers;
+  },
+
+  this.removeByMockupId = function(mockupId) {
+    var result = this.MockupLayers.remove({id: mockupId});
+    return result;
   },
 
   this.save = function(layers) {

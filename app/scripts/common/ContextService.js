@@ -1,42 +1,53 @@
 angular.module('mockupApp')
-.service('contextService', ['$http', function() {
-	this.file = { //file usually charged
+.service('context', ['$http', function() {
+	this.mockup = { //mockup usually charged
 		name: undefined,
 		layers: [],
 		canvas: {
 			width: undefined,
 			height: undefined,
 			unit: undefined
-		},
-		selected: {
-			tool: undefined, //tool usually used
-			layer: undefined, //layer usually used
 		}
 	},
 
+  this.layers = [],
 
 
-	this.getSelectedTool = function(){
-		return this.file.selected.tool;
-	},
+	//current tool selected
+	this.tool = {}; 
 
-	this.getSelectedLayer = function(){
-		return this.file.selected.layer;
-	},
+	//current layer selected
+	this.layer = {  
+		  type: '', 
+          isShow: true, 
+          isActive: true,
+          position: {
+            top: 0,
+            left: 0
+          },
+          properties: {
+            color: "#fff",
+            textShadow: "",
+            borderStyle: 'none',
+            fontSize: 14,
+            fontFamily: "Helvetica Neue",
+            textAlign: "",
+            lineHeight: 1,
+            verticalAlign: "",
+            textDecoration: "",
+            webkitTransform: "",
+            webkitFilter: "",
+            width: 100,
+            height: 100
+          },
+          filters: {
+             blur: 0,
+             lighten: 0,
+             brightness: 0,
+             contrast: 0,
+          },                  
+          content: undefined
+          }; 
 
-	this.setSelectedLayer = function(layer){
-		this.file.selected.layer = layer;
-	},
 
-	this.setSelectedTool = function(tool){
-		this.file.selected.tool = tool;
-	},
-
-	this.getSelected = function(){
-		return this.file.selected;
-	},
-
-	this.getCanvas = function(){
-		return this.file.canvas;
-	}
 }]);

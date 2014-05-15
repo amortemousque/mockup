@@ -1,9 +1,9 @@
 'use strict';
 
 mockupApp
-  .controller('PropertiesCtrl', ['$scope', '$filter', 'contextService','commonService','layerService', 'toolService', function ($scope, $filter, contextService, commonService, layerService, toolService) {
+  .controller('PropertiesCtrl', ['$scope', '$filter', 'context','commonService','layerService', 'toolService', function ($scope, $filter, context, commonService, layerService, toolService) {
   	$scope.layerService = layerService;
-	$scope.selected = contextService.getSelected();
+    $scope.context = context;
 	$scope.fonts = commonService.getFonts();
     $scope.strokes = commonService.getStrokes();
     $scope.templateProperties = toolService.getPropertiesTemplate();
@@ -29,12 +29,12 @@ mockupApp
     	}	
     });
 
-    $scope.$watch('selected.layer', function() {
-    	if($scope.selected.layer != undefined) {
-    		console.log("test lqsdfbksjdbf", $scope.selected.layer.properties);
-		    $scope.properties = $scope.selected.layer.properties;
+    $scope.$watch('context.layer', function() {
+    	if(context.layer != undefined) {
+    		console.log("test caca caca", context.layer.properties);
+		    $scope.properties = context.layer.properties;
 	    	$scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
 	    	$scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
 	   }
-	}, false);
+	});
  }]);

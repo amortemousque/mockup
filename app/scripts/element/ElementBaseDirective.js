@@ -1,5 +1,5 @@
 mockupApp
-  .directive('elementBase', ["contextService", "layerService", function(contextService, layerService) {
+  .directive('elementBase', ["context", "layerService", function(context, layerService) {
       return {
         restrict: 'AE',
         transclude: true,
@@ -9,6 +9,7 @@ mockupApp
         controller: function($scope, $element) {
           console.log("layer de la mort : ",$scope.layer);
           console.log("init element base", $element);
+          $scope.context = context;
           $scope.mouseFocusElem = function(){
               $element.find(".btn-remove").removeClass("hide");
               $("#field-style").val($element.attr("style"));
@@ -21,9 +22,8 @@ mockupApp
 
           $scope.activeElem = function($event) {
             console.log("event",$event);
-            if($scope.selected.tool.type == $scope.layer.type || $scope.selected.tool.type == 'move'|| $scope.selected.tool.type == 'resize') {
-              console.log("start drag", $event.type);
-              contextService.setSelectedLayer($scope.layer);
+            if(context.tool.type == $scope.layer.type || context.tool.type == 'move'|| context.tool.type == 'resize') {
+              context.layer = $scope.layer;
               layerService.setActive($scope.layer);
               if($event.type == "dragstart" ||  $event.type == "resizestart") {
                 $scope.$apply();
@@ -33,12 +33,12 @@ mockupApp
           }
 
           $scope.resizeElem = function(event, ui){
-            console.log("resizeElem");
+            // console.log("resizeElem");
 
-            $scope.layer = contextService.getSelectedLayer();
-            $scope.layer.properties.width = ui.size.width;
-            $scope.layer.properties.height = ui.size.height;
-            $scope.$apply();
+            // $scope.layer = contextService.getSelectedLayer();
+            // $scope.layer.properties.width = ui.size.width;
+            // $scope.layer.properties.height = ui.size.height;
+            // $scope.$apply();
           }
 
           $scope.clickRemoveElement = function($event){
@@ -46,7 +46,7 @@ mockupApp
             $event.stopPropagation();
           }
           
-          $scope.selected = contextService.getSelected();
+         // $scope.selected = contextService.getSelected();
 
           $scope.$content = $($element.find(".elem-content"));
 
@@ -59,7 +59,7 @@ mockupApp
             borderBottomRightRadius: 0
           }
 
-          $scope.$watch('selected.layer.properties', function() {
+          $scope.$watch('context.layer.properties', function() {
               $scope.propertiesElem.width = $scope.layer.properties.width + 2;
               $scope.propertiesElem.height = $scope.layer.properties.height + 2;
               $scope.propertiesElem.borderTopLeftRadius = $scope.layer.properties.borderTopLeftRadius;
@@ -91,13 +91,13 @@ mockupApp
               }
           });
           $scope.element = $element;
-          $scope.$watch('selected.tool', function(tool) {
-            if($scope.selected.tool != undefined && $scope.selected.tool.type != "resize"){
+          $scope.$watch('context.tool', function(tool) {
+            if(context.tool != undefined && context.tool.type != "resize"){
               $scope.element.resizable('disable');
             } else {
               $scope.element.resizable('enable');
             }
-            if($scope.selected.tool != undefined && $scope.selected.tool.type != "move"){
+            if(context.tool != undefined && context.tool.type != "move"){
               $scope.element.draggable('disable');
             } else {
               $scope.element.draggable('enable');

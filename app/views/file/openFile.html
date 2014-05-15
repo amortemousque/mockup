@@ -1,4 +1,4 @@
-<div class="modal ng-scope top animation-fade" tabindex="-1" role="dialog" style="display: block;">
+<div class="modal ng-scope top" tabindex="-1" role="dialog" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,7 +6,8 @@
         <h4 class="modal-title">New mockup</h4>
       </div>
       <div class="modal-body">
-        <table class="table table-stripped">
+        <div class="gridStyle" ng-grid="gridOptions" ng-style="getTableStyle()"></div>
+        <!-- <table class="table table-stripped">
           <thead>
             <tr>
               <th>Nom</th>
@@ -17,7 +18,7 @@
               <td><a href="#" data-dismiss="modal" ng-click="loadMockup(mockup)">{{mockup.name}}</a></td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="$hide()">Cancel</button>
@@ -26,3 +27,4 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>
+

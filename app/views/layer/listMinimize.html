@@ -7,7 +7,7 @@
 			<canvas class="pull-left canvas canvas-xs"></canvas>
 		</div>
 		<div class="pull-right">
-			<input style='width:150px;' class="pull-right form-control input-sm" ng-readonly="!showInput" ng-blur="showInput = false" ng-dblclick="showInput = true" ng-model="layer.name" value="{{layer.name}}" readonly="readonly" />
+			<input style='width:150px;' class="pull-right form-control input-sm" ng-readonly="!showInput" ng-blur="showInput = false" ng-dblclick="showInput = true; $event.stopPropagation()" ng-model="layer.name" value="{{layer.name}}" readonly="readonly" />
 		</div>
 	</li>
 </ul>

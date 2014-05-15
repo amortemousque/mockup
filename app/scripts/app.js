@@ -8,7 +8,8 @@ var mockupApp = angular.module('mockupApp',   [
   'ngAnimate',
   'ui',
   'mgcrea.ngStrap',
-  'blueimp.fileupload'
+  'blueimp.fileupload',
+  'ngGrid'
 ])
   .config(function ($routeProvider) {
     $routeProvider
