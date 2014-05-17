@@ -16,23 +16,24 @@ mockupApp
     }, true);
 
     $scope.addLayerOnCanvas = function(){
-      console.log("image drag");
     	if(context.tool != undefined && context.tool.type != "move" && context.tool.type != "resize") {
         var canvasPosition = $("#canvas").offset();
-        var topPosition =  window.mouseY - canvasPosition.top;
-        var leftPosition =  window.mouseX - canvasPosition.left;
+
+
         var newLayer = {
           type: context.tool.type, 
           isShow: true, 
           isActive: true,
           position: {
-            top: topPosition,
-            left: leftPosition
+            top: window.mouseY - canvasPosition.top,
+            left: window.mouseX - canvasPosition.left
           },
           properties: {
-            color: "#fff",
+            color: "#999",
             textShadow: "",
-            borderStyle: 'none',
+            borderStyle: 'solid',
+            borderColor: '#999',
+            borderWidth: 0,
             fontSize: 14,
             fontFamily: "Helvetica Neue",
             textAlign: "",
@@ -52,16 +53,21 @@ mockupApp
           },                  
           content: undefined
         };
+
+
+        if (context.tool.type == "shape" || context.tool.type == "image") {
+          newLayer.properties.borderWidth = 1;
+        }
+
 	  		$scope.layerService.add(newLayer);
         context.layer = newLayer;
         layerService.setActive(newLayer);
 	  	}
     }
 
-    $scope.$watch('context.layer', function() {
-      if(context.layer != undefined) {
+  $scope.$watch('context.layer', function() {
+    if(context.layer != undefined) {
         commonService.setProperties(context.layer.properties);
-  //      $scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
      }
   }, true);
  }]);

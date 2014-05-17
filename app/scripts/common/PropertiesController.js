@@ -12,7 +12,7 @@ mockupApp
     };
     $scope.properties = commonService.getProperties();
 
-	$scope.form = { 
+	$scope.form = {
 		font: $scope.fonts[0],
 		stroke: $scope.strokes[0]
 	}
@@ -31,7 +31,6 @@ mockupApp
 
     $scope.$watch('context.layer', function() {
     	if(context.layer != undefined) {
-    		console.log("test caca caca", context.layer.properties);
 		    $scope.properties = context.layer.properties;
 	    	$scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
 	    	$scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];

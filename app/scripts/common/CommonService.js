@@ -5,6 +5,10 @@ angular.module('mockupApp')
 		{id:"cm", type:"cm", name: "Centimeters"}
 	],
 
+	this.formats = [
+		{name: "A4", size: {width:21, height: 29.7, unit_id: "cm"}},
+		{name: "A3", size: {width:29.7, height: 42, unit_id: "cm"}}
+	],
 
 	this.fonts = [
 		{css: "Arial", name : "Arial"}, 
@@ -27,16 +31,16 @@ angular.module('mockupApp')
     ],
 
     this.strokes = [
-	      {name:'none', css:'none', img : "", status: ""},
-	      {name:'dotted', css:'dotted', img: "", status: ""},
-	      {name:'dashed', css:'dashed', img: "",  status: ""},
-	      {name:'solid', css:'solid', img : "", status: ""},
-	      {name:'double', css:'double', img : "", status: ""},
-	      {name:'groove', css:'groove', img : "", status: ""},
-	      {name:'ridge', css:'ridge', img : "", status: ""},
-	      {name:'inset', css:'inset', img : "", status: ""},
-	      {name:'outset', css:'outset', img : "", status: ""}
-	    ],
+      {name:'none', css:'none', img : "", status: ""},
+      {name:'dotted', css:'dotted', img: "", status: ""},
+      {name:'dashed', css:'dashed', img: "",  status: ""},
+      {name:'solid', css:'solid', img : "", status: ""},
+      {name:'double', css:'double', img : "", status: ""},
+      {name:'groove', css:'groove', img : "", status: ""},
+      {name:'ridge', css:'ridge', img : "", status: ""},
+      {name:'inset', css:'inset', img : "", status: ""},
+      {name:'outset', css:'outset', img : "", status: ""}
+    ],
 	
 	this.properties = {
 		color: "#fff",
@@ -72,6 +76,10 @@ angular.module('mockupApp')
 		return this.properties;
 	}
 
+	this.getFormats = function(){
+		return this.formats;
+	}
+
 	this.setProperties = function(properties){
 		this.properties = properties;
 	}
@@ -103,4 +111,6 @@ angular.module('mockupApp')
 			target.backgroundImage = source.backgroundImage;
 		}
 	}
+
+	this.get
 }]);

@@ -7,7 +7,7 @@ mockupApp
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-
+          console.log("element", $element);
           $scope.dblClickTextElem = function(){
             if(context.tool.type == $scope.layer.type){
               $scope.$textarea.show().focus();
@@ -21,8 +21,8 @@ mockupApp
             $scope.$textarea.hide();
             return false;
           }
-          $scope.$text = $scope.$content.find("p");
-          $scope.$textarea = $scope.$content.find("textarea")
+          $scope.$text = $element.find("p");
+          $scope.$textarea = $element.find("textarea")
             .css({
               "top": 0, 
               "left": 0})
@@ -30,7 +30,7 @@ mockupApp
             .focusout($scope.blurTextElem)
             .focus();
             
-          $scope.$content.dblclick($scope.dblClickTextElem);
+          $element.dblclick($scope.dblClickTextElem);
         },
         templateUrl : '/views/element/elementText.html'
       }
