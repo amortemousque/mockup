@@ -6,6 +6,12 @@ angular.module('mockupApp')
       'update': { method:'PUT' }
   });
 
+  this.Generator = $resource('http://localhost:port/generator/:id', {port: ':3000'},
+  {
+      'update': { method:'PUT' },
+  });
+
+
   this.getAll = function() {
       var mockups = this.Mockups.query();
       return mockups;
@@ -29,5 +35,16 @@ angular.module('mockupApp')
     return mockup;
 
   	// } 
+  }
+
+  this.generatePdf = function(idMockup) {
+    console.log("generate", idMockup);
+    // if (mockup._id != undefined) {
+    //  this.Mockup.update({ id:$id }, mockup);
+    // } else {
+    var pdf = this.Generator.get({id:idMockup});
+    return pdf;
+
+    // } 
   }
 }]);

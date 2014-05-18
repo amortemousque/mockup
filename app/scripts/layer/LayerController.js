@@ -4,7 +4,7 @@ mockupApp
   .controller('LayerCtrl', ['$scope', '$modal', 'context', 'layerService', 'commonService',function ($scope, $modal, context, layerService, commonService) {
   	$scope.layers = layerService.getAll();
   	$scope.layerService = layerService;
-    $scope.canvas = context.mockup.canvas;
+    $scope.mockup = context.mockup;
     $scope.sortableOptions = {
       update: function(e, ui) { },
       axis: 'y'

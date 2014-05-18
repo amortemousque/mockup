@@ -11,25 +11,30 @@ mockupApp
           $scope.dblClickTextElem = function(){
             if(context.tool.type == $scope.layer.type){
               $scope.$textarea.show().focus();
-              $scope.$text.hide();
+              $scope.$p.hide();
             }
             return false;
           }
-          $scope.blurTextElem = function(){
-            console.log("blurTextElem");
-            $scope.$text.show();
+          $scope.blurTextElem = function() {
             $scope.$textarea.hide();
+            $scope.$p.show();
             return false;
           }
-          $scope.$text = $element.find("p");
+          $scope.calculeSize = function() {
+            $scope.layer.properties.width =  $(this).outerWidth();
+            $scope.layer.properties.height =  $(this).outerHeight();
+            $scope.$apply();
+            return false;
+          }
+          $scope.$p = $element.find("p").hide();
           $scope.$textarea = $element.find("textarea")
             .css({
               "top": 0, 
               "left": 0})
             .addClass("form-control")
             .focusout($scope.blurTextElem)
+            .mouseup($scope.calculeSize)  
             .focus();
-            
           $element.dblclick($scope.dblClickTextElem);
         },
         templateUrl : '/views/element/elementText.html'

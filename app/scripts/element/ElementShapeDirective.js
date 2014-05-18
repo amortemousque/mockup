@@ -3,12 +3,13 @@ mockupApp
       return {
         restrict: 'AE',
         transclude: true,
-        scope: false,
+        //scope: false,
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-          $scope.tool = context.tool;
-          $scope.layer = context.layer;
-        }
+         // $scope.tool = context.tool;
+         // $scope.layer = context.layer;
+        },
+        templateUrl : '/views/element/elementShape.html'
       }
   }]);

@@ -20,7 +20,18 @@ mockupApp
         multiSelect: false,
         columnDefs: [
           { field: 'name', displayName: 'Name' },
-          { field: '', cellTemplate: '<div class="cell-action pull-right"><button class="btn btn-unstyled btn-lg" ng-click="loadMockup(row.entity)"><i class="text-primary fa fa-pencil"></i></button> <button class="btn btn-unstyled btn-lg" ng-click="deleteMockup(row.entity)"><i class="text-danger fa fa-times"></i></button></div>' }
+          { field: '', cellTemplate: 
+          '<div class="cell-action pull-right">'+
+            '<button class="btn btn-unstyled btn-lg" ng-click="loadMockup(row.entity)">'+
+              '<i class="text-primary fa fa-pencil"></i>' +
+            '</button>' +
+            '<button class="btn btn-unstyled btn-lg" ng-click="generatePdf(row.entity)">' +
+              '<i class="text-danger fa fa-pencil"></i>' +
+            '</button>' +
+            '<button class="btn btn-unstyled btn-lg" ng-click="deleteMockup(row.entity)">' +
+              '<i class="text-danger fa fa-times"></i>' +
+            '</button>' +
+          '</div>' }
         ],
         data: 'mockups' };
 
@@ -47,7 +58,6 @@ mockupApp
       };
 
   		$scope.newFile = function(modal){
-  			console.log("modal", modal);
 			  context.mockup.layers = [];
 	  		context.mockup.canvas.width = $scope.file.canvas.width;
 	  		context.mockup.canvas.height = $scope.file.canvas.height;
@@ -82,7 +92,8 @@ mockupApp
 
       $scope.loadMockup = function(mockup) {
         console.log("mockup to load", mockup);
-        context.mockup = mockup;
+        context.mockup.name = mockup.name;
+        context.mockup.canvas = mockup.canvas;
         var layersPromise = layerService.getAllByMockupId(mockup._id);
         layersPromise.$promise.then(function(layers){
           console.log("layers to load", layers);
@@ -103,6 +114,13 @@ mockupApp
           $scope.mockups.splice(index,1);  
         });
       }
+
+      $scope.generatePdf = function(mockup) {
+        var generatePromise = fileService.generatePdf(mockup._id);
+        generatePromise.$promise.then(function(result){
+        });
+      }
+
 
       $scope.getTableStyle= function() {
        console.log("tet");

@@ -3,7 +3,7 @@
  ng-blur="mouseBlurElem()"  
  ng-focus="mouseFocusElem()" 
  ng-click="activeElem($event)"
- ng-style="layer.properties" 
+ style="left:{{layer.position.left}}px; top:{{layer.position.top}}px"
  ng-switch="layer.type"
  >
 	<div ng-switch-when="text"><div element-text ng-model="layer"></div></div>

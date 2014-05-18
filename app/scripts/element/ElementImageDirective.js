@@ -27,7 +27,7 @@ mockupApp
               url: "http://127.0.0.1:3000/files",
               method: "post",
               done: function (e, data) {
-                  $scope.layer.content = "http://127.0.0.1:3000/files/"+data.files[0].name;
+                  $scope.layer.content = data.files[0].name;
                   $scope.$apply();
               }
             });

@@ -60,8 +60,6 @@ mockupApp
               stop: function(event, ui) {
                 $scope.layer.position.top = ui.position.top; 
                 $scope.layer.position.left = ui.position.left;
-                $scope.layer.properties.top = ui.position.top; 
-                $scope.layer.properties.left = ui.position.left;
                 $scope.$apply();
 
               }

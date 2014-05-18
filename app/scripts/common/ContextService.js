@@ -1,13 +1,13 @@
 angular.module('mockupApp')
-.service('context', ['$http', function() {
+.service('context', ['$http', 'commonService', function($http, commonService) {
 	this.mockup = { //mockup usually charged
 		name: undefined,
 		layers: [],
 		canvas: {
-			width: undefined,
-			height: undefined,
-			unit: undefined
-		}
+      width: commonService.formats[0].size.width,
+      height: commonService.formats[0].size.height,
+      unit: commonService.units[1]
+    }
 	},
 
   this.layers = [],
