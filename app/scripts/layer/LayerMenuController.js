@@ -11,6 +11,8 @@ var LayerMenuCtrl = angular.module('mockupApp')
     $scope.properties = commonService.getProperties();
     $scope.modalPromise = $modal({scope: $scope, template: 'views/layer/modal.html', show: false});
 
+    $scope.accordions = [true, false, false];
+
     $scope.strokePositions = [
       {id:"outline", name:"Outline"},
       {id:"border", name:"Border"}
@@ -50,7 +52,18 @@ var LayerMenuCtrl = angular.module('mockupApp')
           $scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
        }
        $scope.modalPromise.show();
-    };
+    }
+
+    $scope.collapse = function(index) {
+      for(var i = 0; i < $scope.accordions.length; i++) {
+        if (index == i){
+          $scope.accordions[i] = true;
+        } else {
+          $scope.accordions[i] = false;
+        }
+      }
+      console.log("$scope.accordions", $scope.accordions);
+    }
 
     $scope.validateModification = function() {
       if(context.layer != undefined ){

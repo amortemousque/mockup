@@ -27,6 +27,14 @@
   	          <li><a href="" ng-click="exportFile($event)"><span class="glyphicon glyphicon-fileNew"></span> Export PDF</a></li>
 	        </ul>
 	      </li>
+  	      <li class="active dropdown">
+	        <a href="" class="dropdown-toggle" data-toggle="dropdown">Canvas<b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="" ng-click="openModal('canvasSize')" type="button" ><span class="glyphicon glyphicon-fileNew"></span> Canvas size</a>
+	          </li>
+	   
+	        </ul>
+	      </li>
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
@@ -44,8 +52,8 @@
 				</div>
 			</div>
 			<div ng-controller="LayerCtrl" class="col-md-8 col-lg-8">
-				<div class="container-canvas">
-					<div ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker" style="width:{{mockup.canvas.width}}{{mockup.canvas.unit.type}}; height:{{mockup.canvas.height}}{{mockup.canvas.unit.type}}">
+				<div class="container-canvas" style="display:none;">
+					<div ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker" style="width:{{mockup.canvas.width}}{{mockup.canvas.unit.type}}; height:{{mockup.canvas.height}}{{mockup.canvas.unit.type}};">
 			      	<div ng-include src="'views/layer/list.html'"></div>
 				</div>
 				</div>
@@ -53,36 +61,24 @@
 			</div>
 			<div class="col-md-3 col-lg-3">
 				<div class="side-menu">
-					<div class="panel-group" id="accordion">
-					  <div ng-controller="PropertiesCtrl" class="panel panel-default">
-					    <div class="panel-heading">
-					      <h4 class="panel-title">
-					        <a class="accordion-toggle" data-toggle="collapse" href="#collapseTwo">
-					          Properties
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="collapseTwo" class="panel-collapse collapse in">
-					      <div class="panel-properties panel-body">
-        			      	<div ng-include src="templateProperties.url"></div>
-					      </div>
-					    </div>
+				<accordion close-others="false">
+				    <accordion-group heading="Properties" is-open="true">
+				      <div ng-controller="PropertiesCtrl" >
+    			      	<div ng-include src="templateProperties.url"></div>
+				      </div>
+				    </accordion-group>
+				    <accordion-group heading="Layers" is-open="true">
+				      <div ng-controller="LayerMenuCtrl">
+				      	<div ng-include src="'views/layer/listMinimize.html'"></div>
 					  </div>
-					  <div ng-controller="LayerMenuCtrl" class="panel panel-default">
-					    <div class="panel-heading">
-					      <h4 class="panel-title">
-					        <a class="accordion-toggle" data-toggle="collapse" href="#collapseThree">
-					          Layers
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="collapseThree" class="panel-collapse collapse in">
-					      <div class="panel-body">
-					      	<div ng-include src="'views/layer/listMinimize.html'"></div>
-					      </div>
-					    </div>
+				    </accordion-group>
+				    <accordion-group heading="Bindings">
+				      <div ng-controller="LayerMenuCtrl">
+				      	<div ng-include src="'views/layer/listMinimize.html'"></div>
 					  </div>
-					</div>
+				    </accordion-group>
+				</accordion>
+
 				</div>
 			</div>
 		</div>

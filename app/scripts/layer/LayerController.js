@@ -2,7 +2,7 @@
 
 mockupApp
   .controller('LayerCtrl', ['$scope', '$modal', 'context', 'layerService', 'commonService',function ($scope, $modal, context, layerService, commonService) {
-  	$scope.layers = layerService.getAll();
+  	$scope.layers = context.layers;
   	$scope.layerService = layerService;
     $scope.mockup = context.mockup;
     $scope.sortableOptions = {

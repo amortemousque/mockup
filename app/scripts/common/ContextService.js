@@ -19,35 +19,35 @@ angular.module('mockupApp')
 	//current layer selected
 	this.layer = {  
 		  type: '', 
-          isShow: true, 
-          isActive: true,
-          position: {
-            top: 0,
-            left: 0
-          },
-          properties: {
-            color: "#fff",
-            textShadow: "",
-            borderStyle: 'none',
-            fontSize: 14,
-            fontFamily: "Helvetica Neue",
-            textAlign: "",
-            lineHeight: 1,
-            verticalAlign: "",
-            textDecoration: "",
-            webkitTransform: "",
-            webkitFilter: "",
-            width: 100,
-            height: 100
-          },
-          filters: {
-             blur: 0,
-             lighten: 0,
-             brightness: 0,
-             contrast: 0,
-          },                  
-          content: undefined
-          }; 
-
+      isShow: true, 
+      isActive: true,
+      position: {
+        top: 0,
+        left: 0
+      },
+      properties: {
+        color: "#fff",
+        textShadow: "",
+        borderStyle: 'none',
+        fontSize: 14,
+        fontFamily: "Helvetica Neue",
+        textAlign: "",
+        lineHeight: 1,
+        verticalAlign: "",
+        textDecoration: "",
+        webkitTransform: "",
+        webkitFilter: "",
+        width: 100,
+        height: 100
+      },
+      filters: {
+         blur: 0,
+         lighten: 0,
+         brightness: 0,
+         contrast: 0,
+      },                  
+      bindings: [],
+      content: undefined
+      }; 
 
 }]);

@@ -25,9 +25,9 @@ mockupApp
             '<button class="btn btn-unstyled btn-lg" ng-click="loadMockup(row.entity)">'+
               '<i class="text-primary fa fa-pencil"></i>' +
             '</button>' +
-            '<button class="btn btn-unstyled btn-lg" ng-click="generatePdf(row.entity)">' +
-              '<i class="text-danger fa fa-pencil"></i>' +
-            '</button>' +
+            '<a class="btn btn-unstyled btn-lg" href="http://localhost:3000/generator/{{row.entity._id}}" target="_blank">' +
+              '<i class="text-success fa fa-download"></i>' +
+            '</a>' +
             '<button class="btn btn-unstyled btn-lg" ng-click="deleteMockup(row.entity)">' +
               '<i class="text-danger fa fa-times"></i>' +
             '</button>' +
@@ -38,6 +38,8 @@ mockupApp
 
       // Pre-fetch an external template populated with a custom scope
       $scope.modalOpenFile = $modal({scope: $scope, template: 'views/file/openFile.html', show: false});
+      $scope.modalCanvasSize = $modal({scope: $scope, template: 'views/file/canvasSize.html', show: false});
+
       $scope.modalNewFile = $modal(
         { scope: $scope, 
           template: 'views/file/newFile.html', 
@@ -51,6 +53,8 @@ mockupApp
             $scope.modalOpenFile.show();
           if(modalName == "saveAs")
             $scope.modalSaveAs.show();
+          if(modalName == "canvasSize") 
+            $scope.modalCanvasSize.show();
       }
 
       $scope.exportFile = function($event){
@@ -58,13 +62,22 @@ mockupApp
       };
 
   		$scope.newFile = function(modal){
-			  context.mockup.layers = [];
+        context.mockup.name = $scope.file.name;
+        context.layers.splice(0, context.layers.length);
 	  		context.mockup.canvas.width = $scope.file.canvas.width;
 	  		context.mockup.canvas.height = $scope.file.canvas.height;
 	  		context.mockup.canvas.unit = $scope.file.canvas.unit;
+        $(".container-canvas").show();
         $scope.modalNewFile.hide();
 
   		};
+
+      $scope.changeCanvasSize = function(modal) {
+        context.mockup.canvas.width = $scope.file.canvas.width;
+        context.mockup.canvas.height = $scope.file.canvas.height;
+        context.mockup.canvas.unit = $scope.file.canvas.unit;
+        $scope.modalCanvasSize.hide();
+      }
 
       $scope.saveFile = function($event, modal){
         var mockup = {};
@@ -84,6 +97,8 @@ mockupApp
           var deletePromise = layerService.removeByMockupId(result._id);
           deletePromise.$promise.then(function(result){
             layerService.save(context.layers);
+            $scope.mockups = fileService.getAll();
+
           });
         })
         $scope.modalSaveAs.hide();
@@ -92,6 +107,8 @@ mockupApp
 
       $scope.loadMockup = function(mockup) {
         console.log("mockup to load", mockup);
+                $(".container-canvas").show();
+
         context.mockup.name = mockup.name;
         context.mockup.canvas = mockup.canvas;
         var layersPromise = layerService.getAllByMockupId(mockup._id);
@@ -114,13 +131,6 @@ mockupApp
           $scope.mockups.splice(index,1);  
         });
       }
-
-      $scope.generatePdf = function(mockup) {
-        var generatePromise = fileService.generatePdf(mockup._id);
-        generatePromise.$promise.then(function(result){
-        });
-      }
-
 
       $scope.getTableStyle= function() {
        console.log("tet");

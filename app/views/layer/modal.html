@@ -9,19 +9,19 @@
           <div class="col-md-3">
             <div class="modal-menu">
               <div class="btn-group-vertical btn-group-modal col-md-12">
-                <button data-parent="#accordion-properties" data-toggle="collapse" data-target="#panel-stroke" type="button" class="btn btn-default col-md-12 dropdown-toggle " data-toggle="dropdown">
+                <button ng-click="collapse(0)" type="button" class="btn btn-default col-md-12">
                   <i class="fa fa-minus"></i><span>Stroke</span>
                 </button>
-                <button data-parent="#accordion-properties" data-toggle="collapse" data-target="#panel-shadow" type="button" class="btn btn-default col-md-12 dropdown-toggle collapsed" data-toggle="dropdown">
+                <button  ng-click="collapse(1)" type="button" class="btn btn-default col-md-12">
                   <i class="fa fa-shield"></i><span>Shadow</span></button>
-                <button data-parent="#accordion-properties" data-toggle="collapse" data-target="#panel-overlay" type="button" class="btn btn-default col-md-12 dropdown-toggle collapsed" data-toggle="dropdown">
+                <button  ng-click="collapse(2)" type="button" class="btn btn-default col-md-12">
                   <i class="fa fa-square"></i><span>Gradient overlay</span></button>
               </div>
             </div>
           </div>
           <div class="col-md-9">
             <div class="modal-wrapper">
-              <div class="collapse in" data-title="Stroke" id="panel-stroke">
+              <div data-title="Stroke" ng-show="accordions[0]" id="panel-stroke">
                 <div class="form-horizontal">
                     <div class="form-group">
                       <label class="col-sm-3 control-label" for="">Size</label>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
               </div>
-              <div class="collapse" data-title="Shadow" id="panel-shadow">
+              <div data-title="Shadow" ng-show="accordions[1]" id="panel-shadow">
                 <div class="form-horizontal">
                     <div class="form-group">
                       <label class="col-sm-3 control-label" for="">Color</label>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
               </div>
-              <div class="collapse" data-title="Gradient overlay" id="panel-overlay">
+              <div data-title="Gradient" ng-show="accordions[2]" id="panel-overlay">
                 <div class="container-gradientpicker">
                     <ui-gradientpicker ng-model="form.properties.backgroundImage"></ui-gradientpicker>
                     <input class="form-control input-sm" type="hidden" ng-model="form.properties.backgroundImage" />

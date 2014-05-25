@@ -7,6 +7,7 @@ var mockupApp = angular.module('mockupApp',   [
   'ngSanitize',
   'ngAnimate',
   'ui',
+  'ui.bootstrap',
   'mgcrea.ngStrap',
   'blueimp.fileupload',
   'ngGrid'
