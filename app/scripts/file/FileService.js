@@ -27,7 +27,7 @@ angular.module('mockupApp')
   },
 
   this.save = function(mockup) {
-    console.log("save", mockup);
+    console.log("save !!!!!!!!", mockup);
   	// if (mockup._id != undefined) {
   	// 	this.Mockup.update({ id:$id }, mockup);
   	// } else {
@@ -36,6 +36,7 @@ angular.module('mockupApp')
 
   	// } 
   }
+
 
   this.generatePdf = function(idMockup) {
     console.log("generate", idMockup);

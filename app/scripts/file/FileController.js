@@ -85,12 +85,15 @@ mockupApp
 
         context.mockup.name = $scope.file.name;
 
-         console.log("result save mockup", context.mockup);
+        console.log("result save mockup", context.mockup);
 
         var mockupPromise = fileService.save(context.mockup);
 
         mockupPromise.$promise
         .then(function(result){
+
+          context.mockup._id = result._id;
+
           angular.forEach(context.layers, function(layer, key){
             layer.mockup_id = result._id;
           }, log);
@@ -98,19 +101,23 @@ mockupApp
           deletePromise.$promise.then(function(result){
             layerService.save(context.layers);
             $scope.mockups = fileService.getAll();
-
           });
         })
+     
         $scope.modalSaveAs.hide();
 
       };
 
       $scope.loadMockup = function(mockup) {
         console.log("mockup to load", mockup);
-                $(".container-canvas").show();
+        $(".container-canvas").show();
+
 
         context.mockup.name = mockup.name;
+        $scope.file.name = context.mockup.name;
+
         context.mockup.canvas = mockup.canvas;
+        context.mockup._id = mockup._id;
         var layersPromise = layerService.getAllByMockupId(mockup._id);
         layersPromise.$promise.then(function(layers){
           console.log("layers to load", layers);

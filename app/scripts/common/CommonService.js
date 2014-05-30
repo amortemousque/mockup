@@ -41,7 +41,7 @@ angular.module('mockupApp')
       {name:'inset', css:'inset', img : "", status: ""},
       {name:'outset', css:'outset', img : "", status: ""}
     ],
-	
+
 	this.properties = {
 		color: "#fff",
 		textShadow: "",
@@ -57,8 +57,16 @@ angular.module('mockupApp')
 		height: "",
 		outlineStyle: "none",
 		webkitBackgroundClip: "none",
-		boxShadow: "none"
-	 }
+		boxShadow: "none",
+		toArray: function() {
+			var list = [];
+			angular.forEach(this, function(value, key) {
+		       this.push(key);
+		     }, list);
+			return list;
+		}
+
+	},
 
 	this.getUnits = function(){
 		return this.units;

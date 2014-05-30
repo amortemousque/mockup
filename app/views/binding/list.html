@@ -1,5 +1,16 @@
-<lu class="list-binding">
-	<li ng-repeat="layer in layers" data-type="{{layer.type}}" class="layer position-1" ng-show="layer.isShow">
-		
+<button class="btn" ng-click="newBinding()">Ajouter</button>
+<lu class="list-unstyled list-binding">
+	<li ng-repeat="binding in context.layer.bindings">
+		<div class="row row-condenced">
+			<div class="col-xs-5">
+				<select ng-model="binding.property" ng-options="prop for prop in propertiesList" class="form-control"></select>
+			</div>
+			<div class="col-xs-4">
+				<input ng-model="binding.name" type="text" class="form-control"  />
+			</div>
+			<div class="col-xs-2">
+				<button class="btn btn-block" ng-click="removeBinding(binding)">X</button>
+			</div>
+		</div>
 	</li>
 </lu>

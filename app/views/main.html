@@ -61,24 +61,23 @@
 			</div>
 			<div class="col-md-3 col-lg-3">
 				<div class="side-menu">
-				<accordion close-others="false">
-				    <accordion-group heading="Properties" is-open="true">
-				      <div ng-controller="PropertiesCtrl" >
-    			      	<div ng-include src="templateProperties.url"></div>
-				      </div>
-				    </accordion-group>
-				    <accordion-group heading="Layers" is-open="true">
-				      <div ng-controller="LayerMenuCtrl">
-				      	<div ng-include src="'views/layer/listMinimize.html'"></div>
-					  </div>
-				    </accordion-group>
-				    <accordion-group heading="Bindings">
-				      <div ng-controller="LayerMenuCtrl">
-				      	<div ng-include src="'views/layer/listMinimize.html'"></div>
-					  </div>
-				    </accordion-group>
-				</accordion>
-
+					<accordion close-others="false">
+					    <accordion-group heading="Properties" is-open="true">
+					      <div ng-controller="PropertiesCtrl" >
+	    			      	<div ng-include src="templateProperties.url"></div>
+					      </div>
+					    </accordion-group>
+					    <accordion-group heading="Layers" is-open="true">
+					      <div ng-controller="LayerMenuCtrl">
+					      	<div ng-include src="'views/layer/listMinimize.html'"></div>
+						  </div>
+					    </accordion-group>
+					    <accordion-group heading="Bindings">
+					      <div ng-controller="BindingCtrl">
+					      	<div ng-include src="'views/binding/list.html'"></div>
+						  </div>
+					    </accordion-group>
+					</accordion>
 				</div>
 			</div>
 		</div>

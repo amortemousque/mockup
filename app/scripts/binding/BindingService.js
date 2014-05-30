@@ -7,4 +7,16 @@ angular.module('mockupApp')
       'save': {method: 'POST', isArray: true }
   });
 
+
+  this.getAllByLayerId = function(layerId) {
+    var layers = this.Bindings.query({id: layerId});
+    return layers;
+  },
+
+  this.save = function(bindings) {
+    console.log("save bindings", bindings);
+    var bindings = this.Bindings.save(bindings); 
+    return bindings;
+  }
+
 }])

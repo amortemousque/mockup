@@ -45,6 +45,7 @@ mockupApp
             width: 100,
             height: 100
           },
+          bindings: [],
           filters: {
              blur: 0,
              lighten: 0,
