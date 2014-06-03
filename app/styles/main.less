@@ -9,7 +9,7 @@ Common
 ********************************/
 
 .container {
-    margin-top:60px;
+    margin-top:30px;
     max-width:2000px;
 }
 
@@ -17,6 +17,7 @@ Common
     max-height: 32cm;
     overflow: scroll;
     position: relative;
+    width: 100%;
 }
 
 .side-menu {
@@ -35,6 +36,74 @@ Canvas
     height:600px;
 }
 
+.tablist {
+    margin: 0px;
+    height: 34px;
+    .tablist-item {
+        width:200px;
+        .input-group {
+            float:left;
+        }
+        .input-group-addon {
+            border-bottom: none;
+        }
+        input {
+            box-shadow: none;
+            background-color: #eeeeee;
+            border-right: none;
+            border-bottom: none;
+            color: #777;
+        }
+        button {
+            outline: none;
+            padding-right: 5px;
+            &:hover .fa {
+                color: #b94a48;
+            }
+        }
+        .fa {
+            color:#ccc;
+        }
+        &:after {
+            position: absolute;
+            left: 209px;
+            content : "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 34px 0 0 15px;
+            border-color: transparent transparent transparent #eeeeee;
+
+        }
+        &:before {
+            position: absolute;
+            left: 210px;
+            content : "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 34px 0 0 15px;
+            border-color: transparent transparent transparent #cccccc;
+        }
+        &:hover {
+            input {
+                border-top-color:#66afe9 !important;
+                border-left-color:#66afe9 !important;
+
+            }
+            .input-group-addon {
+                border-left-color:#66afe9 !important;
+                border-top-color:#66afe9 !important;
+            }
+            &:before {
+            border-color: transparent transparent transparent #66afe9 !important;
+            }
+        }
+    }
+
+}
 .canvas-darker {
     background-color: #fff;
     border: 1px solid #fff;
@@ -157,6 +226,15 @@ Input
     box-shadow:none;
 }
 
+.input-group-addon.input-group-button {
+    padding:0px;
+    button {
+        width: 100%;
+        border:none;
+        background-color: transparent;
+    }
+}
+
 /*******************************
 Elements
 ********************************/
@@ -166,7 +244,7 @@ Elements
     z-index: 10;
     cursor: pointer;
     &:hover {
-        border:1px solid #e0eff9 !important;
+        outline: 1px solid #96d0f7!important;
         opacity: 1;
     }
     &.active .btn-remove, &:hover .btn-remove {
@@ -184,10 +262,10 @@ Elements
         background: transparent;
         z-index: 100;   
     }
-    // &.active, &.ui-draggable-dragging {
-    //     border:1px solid #30acff!important;
-    //     opacity: 1;
-    // }
+    &.active, &.ui-draggable-dragging {
+         outline: 1px solid #96d0f7!important;
+         opacity: 1;
+     }
     .elem-content {
         position: absolute;
         width:100%;
@@ -216,6 +294,20 @@ Layers
 /*******************************
 Navbar
 ********************************/
+
+.navbar.navbar-sm {
+    min-height: 30px;
+
+    .navbar-brand {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+    .navbar-nav > li > a {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+}
+
 .modal-menu {
     min-height: 250px;
     background-color: #0091f2;

@@ -5,12 +5,12 @@ angular.module('mockupApp')
 		canvas: {
       width: commonService.formats[0].size.width,
       height: commonService.formats[0].size.height,
-      unit: commonService.units[1]
+      unit: commonService.units[1],
+      isVisible: false
     }
 	},
 
   this.layers = [],
-
 
 	//current tool selected
 	this.tool = {}; 
@@ -47,6 +47,6 @@ angular.module('mockupApp')
       },                  
       bindings: [],
       content: undefined
-      }; 
-
+    }; 
+    
 }]);

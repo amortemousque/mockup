@@ -19,7 +19,6 @@ mockupApp
     	if(context.tool != undefined && context.tool.type != "move" && context.tool.type != "resize") {
         var canvasPosition = $("#canvas").offset();
 
-
         var newLayer = {
           type: context.tool.type, 
           isShow: true, 

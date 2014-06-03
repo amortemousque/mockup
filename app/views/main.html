@@ -1,5 +1,5 @@
 <div>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" bs-navbar>
+	<nav class="navbar navbar-sm navbar-default navbar-fixed-top" role="navigation" bs-navbar>
 	  <!-- Brand and toggle get grouped for better mobile display -->
 	  <div class="navbar-header">
 	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -52,10 +52,20 @@
 				</div>
 			</div>
 			<div ng-controller="LayerCtrl" class="col-md-8 col-lg-8">
-				<div class="container-canvas" style="display:none;">
+				<ul class="tablist list-inline" ng-show="mockup.canvas.isVisible">
+					<li class="tablist-item">
+						<div class="input-group">
+							<input ng-model="mockup.name" class="input-inline form-control title" type="text" />
+							<span class="input-group-addon input-group-button">
+								<button ><i class="fa fa-times"></i></button>
+							</span>
+						</div>
+					</li>
+				</ul>
+				<div class="container-canvas" ng-show="mockup.canvas.isVisible">
 					<div ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker" style="width:{{mockup.canvas.width}}{{mockup.canvas.unit.type}}; height:{{mockup.canvas.height}}{{mockup.canvas.unit.type}};">
-			      	<div ng-include src="'views/layer/list.html'"></div>
-				</div>
+			      		<div ng-include src="'views/layer/list.html'"></div>
+					</div>
 				</div>
 
 			</div>

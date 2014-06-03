@@ -5,7 +5,7 @@ mockupApp
   		$scope.units = commonService.getUnits();
       $scope.mockups = fileService.getAll();
       $scope.formats = commonService.getFormats();
-
+      $scope.canvasVisibled = false;
   		$scope.file = {
         name: context.mockup.name,
         format: $scope.formats[0],
@@ -67,7 +67,7 @@ mockupApp
 	  		context.mockup.canvas.width = $scope.file.canvas.width;
 	  		context.mockup.canvas.height = $scope.file.canvas.height;
 	  		context.mockup.canvas.unit = $scope.file.canvas.unit;
-        $(".container-canvas").show();
+        context.mockup.canvas.isVisible = true;
         $scope.modalNewFile.hide();
 
   		};
@@ -103,20 +103,20 @@ mockupApp
             $scope.mockups = fileService.getAll();
           });
         })
-     
         $scope.modalSaveAs.hide();
 
       };
 
       $scope.loadMockup = function(mockup) {
         console.log("mockup to load", mockup);
-        $(".container-canvas").show();
-
+        $scope.canvasVisibled = true;
 
         context.mockup.name = mockup.name;
         $scope.file.name = context.mockup.name;
 
         context.mockup.canvas = mockup.canvas;
+        context.mockup.canvas.isVisible = true;
+
         context.mockup._id = mockup._id;
         var layersPromise = layerService.getAllByMockupId(mockup._id);
         layersPromise.$promise.then(function(layers){
