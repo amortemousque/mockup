@@ -1,7 +1,13 @@
+html, html > div, html > div > div{
+    height: 100%;
+}
 
 body {
     background: #ddd;
     color: #333;
+    height: 100%;
+    background-image:url("/images/grid.png");
+    background-color: #222;
 }
 
 /*******************************
@@ -13,268 +19,73 @@ Common
     max-width:2000px;
 }
 
-.container-canvas {
-    max-height: 32cm;
-    overflow: scroll;
-    position: relative;
+
+
+
+.workspace {
     width: 100%;
-}
-
-.side-menu {
-    height:1000px;
-}
-
-/*******************************
-Canvas
-********************************/
-.canvas {
-    background-color: #333333;
-}
-
-.canvas.canvas-main {
-    width:100%;
-    height:600px;
-}
-
-.tablist {
-    margin: 0px;
-    height: 34px;
-    .tablist-item {
-        width:200px;
-        .input-group {
-            float:left;
-        }
-        .input-group-addon {
-            border-bottom: none;
-        }
-        input {
-            box-shadow: none;
-            background-color: #eeeeee;
-            border-right: none;
-            border-bottom: none;
-            color: #777;
-        }
-        button {
-            outline: none;
-            padding-right: 5px;
-            &:hover .fa {
-                color: #b94a48;
-            }
-        }
-        .fa {
-            color:#ccc;
-        }
-        &:after {
-            position: absolute;
-            left: 209px;
-            content : "";
-            display: block;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 34px 0 0 15px;
-            border-color: transparent transparent transparent #eeeeee;
-
-        }
-        &:before {
-            position: absolute;
-            left: 210px;
-            content : "";
-            display: block;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 34px 0 0 15px;
-            border-color: transparent transparent transparent #cccccc;
-        }
-        &:hover {
-            input {
-                border-top-color:#66afe9 !important;
-                border-left-color:#66afe9 !important;
-
-            }
-            .input-group-addon {
-                border-left-color:#66afe9 !important;
-                border-top-color:#66afe9 !important;
-            }
-            &:before {
-            border-color: transparent transparent transparent #66afe9 !important;
-            }
-        }
+    section {
+        margin-top: 76px;
+        margin-left: 10%;
     }
-
-}
-.canvas-darker {
-    background-color: #fff;
-    border: 1px solid #fff;
-}
-
-.canvas-xs {
-    width:40px;
-    height:30px;
-}
-
-/*******************************
-Table
-********************************/
-.ngGrid {
-    .cell-action {
-        padding: 5px;
-        .btn {
-            margin-left: 10px;
-        }
-    }
-}
-
-/*******************************
-List
-********************************/
-.list-tools li {
-    margin-bottom: 7px;
-}
- 
-
-.list-item-layers {
-    li {
-        display: block;
-        margin-top:3px;
-        line-height: 32px;
-        vertical-align: middle;
-    }
-
-    li.active{
-        background-color:#e0eff9;
-        outline: 1px solid #96D0F7;
-    }
-
-    li div{
-        padding: 3px 2px;
-        height:29px;
-    }
-}
-
-.item-layer {
-    background-color: #eee;
-    height:35px;
-
-    a {
-        display: inline-block;
-    }
-    span {
-        margin-left:10px;
-    }
-    .form-control {
-        display: inline-block;
-        margin-left:10px;
-        width: auto;
-        height: 30px;
-        margin:0px;
-    }
-    li {
-        position:absolute;
-        top:0px;
-    }
-}
-/*******************************
-Button
-********************************/
-.btn {
-    &.btn-tool {
-        height: 37px;
-        padding:0px;
-        width:100%;
-        background: none;
-        padding-bottom:3px;
-    }
-    &.btn-tool:hover, &.active {
-        box-shadow:none;
-        color: #30acff;
-    }
-    &.btn-remove {
-        position: absolute;
-        top : -10px;
-        right: -10px;
-        border-radius: 20px;
-        padding:5px;
-        vertical-align: middle;
-        border:1px solid #ccc;
+    .tools-bar {
         background-color: #fff;
-        z-index: 10000;
+        left: 0;
+        width:65px;
+        position: fixed;
+        z-index: 100;
+        top: 50px;
+        height: 100%;
+        padding-top:20px;
     }
-    &.btn-unstyled {
-        background: transparent;
-        border: 0px;
-        padding: 0px;
-    }
+    .panels-bar {
+        height: 100%;
+        background-color: #fff;
+        top: 50px;
+        right: 0;
+        width:300px;
+        position: fixed;
+        z-index: 100;
+
+
+        .nav-tabs li.active {
+            border-bottom: 1px solid #999;            
+        }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+            border: 0px;
+        }
+
+        .nav-tabs > li {
+            margin-bottom: 0px;
+        } 
+        .nav-tabs > li > a {
+            border:0;
+            margin-top: 20px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            font-family: Raleway;
+            color: #999;
+            cursor: pointer;
+            a:hover, a:focus {
+                background-color: transparent;
+            }
+        }
+        .nav-tabs > li.active > a {
+            color: #555;
+            cursor: default;
+        }
+        
+        .nav > li > a:hover, .nav > li > a:focus {
+            background-color: transparent;
+        }
+
+        .tab-content > div {
+            margin:10px 10px 0px 10px;
+        }
+    } 
 }
 
-/*******************************
-Input
-********************************/
-
-.input-inline {
-    display: inline;
-} 
-
-.input-sm {
-    padding:0px 6px;
-}
-
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color: transparent;
-    border:none;
-    box-shadow:none;
-}
-
-.input-group-addon.input-group-button {
-    padding:0px;
-    button {
-        width: 100%;
-        border:none;
-        background-color: transparent;
-    }
-}
-
-/*******************************
-Elements
-********************************/
-.elem {
-    color:#fff;
-    position: absolute;
-    z-index: 10;
-    cursor: pointer;
-    &:hover {
-        outline: 1px solid #96d0f7!important;
-        opacity: 1;
-    }
-    &.active .btn-remove, &:hover .btn-remove {
-        display:block;
-        opacity: 1;
-    }
-    &.elem-text textarea {
-        color:#fff;
-        position: absolute;
-        resize: none;
-        border:none;
-        width:100%;
-        height:100%;
-        border-radius:0px;
-        background: transparent;
-        z-index: 100;   
-    }
-    &.active, &.ui-draggable-dragging {
-         outline: 1px solid #96d0f7!important;
-         opacity: 1;
-     }
-    .elem-content {
-        position: absolute;
-        width:100%;
-        height:100%;
-    }
-    .btn-remove {
-        display:none;
-    }
-}
 
 textarea.disabled {
     background:transparent;
@@ -284,98 +95,17 @@ textarea.disabled {
 /*******************************
 Layers
 ********************************/
-.layer {
-    position: absolute;
-    display:block;
-    width:100%;
-    height:600px;
-}
 
 /*******************************
 Navbar
 ********************************/
 
-.navbar.navbar-sm {
-    min-height: 30px;
 
-    .navbar-brand {
-        padding-top: 7px;
-        padding-bottom: 7px;
-    }
-    .navbar-nav > li > a {
-        padding-top: 7px;
-        padding-bottom: 7px;
-    }
-}
 
-.modal-menu {
-    min-height: 250px;
-    background-color: #0091f2;
-    box-shadow: inset -10px 0px 10px -9px rgba(119, 119, 119, 0.7);
-    -moz-box-shadow: inset -10px 0px 10px -9px rgba(119, 119, 119, 0.7);
-    -webkit-box-shadow: inset -10px 0px 10px -9px rgba(119, 119, 119, 0.7);
-}
-.modal-body-duo {
-    padding: 0px;
-}
-.modal-wrapper {
-    padding: 15px 20px 0px 0px;
-}
-.btn-group-modal {
-    padding: 0px;
-
-    .dropdown-toggle, .dropdown-toggle.collapsed:hover {
-        padding-top:10px;
-        padding-bottom:10px;
-        text-align: left;
-        border:none;
-        box-shadow: inset -10px 0px 10px -9px rgba(119, 119, 119, 0.7);
-        -moz-box-shadow: inset -10px 0px 10px -9px rgba(119, 119, 119, 0.7);
-        -webkit-box-shadow: inset -10px 0px 10px -9px rgba(119, 119, 119, 0.7);
-        background-color: #0079c9;
-    }
-    .dropdown-toggle.collapsed {
-        background-color: #0091f2;
-    }
-    .fa {
-        width: 20px;
-    }
-}
-
-.modal-footer.modal-footer-raw {
-    margin-top: 0px;
-}
 
 /*******************************
 Nav vertical
 ********************************/
-.nav-stacked {
-    .nav-tabs {
-        display:inline-block;
-    }
-    .nav-tabs > li {
-        float: none;
-        display:inline-block;
-    }
-    .nav-tabs li {
-        display:block;
-    }
-
-    .tab-content {
-        display:inline-block;;
-    }
-}
-
-.modal-dialog.modal-xxl {
-    width:800px;
-}
-
-.container-gradientpicker {
-}
-
-.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
-    opacity: 1;
-}
 
 
 .picture {
@@ -383,12 +113,5 @@ Nav vertical
     max-height: 100%;
 }
 
-.row.row-condenced {
-    margin-left: -5px;
-    margin-right: -5px;
 
-    [class*="col-"]{
-        padding-left: 5px ;
-        padding-right: 5px;
-    }
-}
+

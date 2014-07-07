@@ -19,16 +19,21 @@
 			</div>
 		</div>
 	</div>
-	<div class="row form-group">
-		<div class="col-lg-12">
-			<div class="input-group">
-				<label class="input-group-addon input-sm">Stroke</label>
-				<input style="width:47px" class="form-control input-inline input-sm" type="number" ng-model="properties.borderWidth" />
-				<select ng-model="form.stroke" ng-options="stroke.name for stroke in strokes" class="form-control">
-				</select>
-				<ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
-				<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" />
-			</div>
+	
+	<div class="row  row-unstyled form-group">
+		<div class="col-xs-2">
+			<label class="input-group-addon input-sm">Stroke</label>
+		</div>
+		<div class="col-xs-3">
+			<input  class="form-control input-inline input-sm" type="number" ng-model="properties.borderWidth" />
+		</div>
+		<div class="col-xs-4">
+			<select ng-model="form.stroke" ng-options="stroke.name for stroke in strokes" class="form-control">
+			</select>
+		</div>
+		<div class="col-xs-3">
+			<ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
+			<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" />
 		</div>
 	</div>
 	<div class="row form-group">

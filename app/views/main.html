@@ -38,20 +38,12 @@
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
-	<div class="container" >
-
-		<div class="row">
-			<div class="col-md-1 col-lg-1">
-				<div class="side-menu">
-					<div class="panel panel-default">
-					  <div class="panel-heading">Tools</div>
-					  <div ng-controller="ToolCtrl" class="panel-body resize-vertical">
-					      	<div ng-include src="'views/tool/list.html'"></div>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<div ng-controller="LayerCtrl" class="col-md-8 col-lg-8">
+	<div class="workspace">
+		<aside class="tools-bar resize-vertical" ng-controller="ToolCtrl" class="">
+			      	<div ng-include src="'views/tool/list.html'"></div>
+		</aside>
+		<section ng-controller="LayerCtrl" >
+			<nav>
 				<ul class="tablist list-inline" ng-show="mockup.canvas.isVisible">
 					<li class="tablist-item">
 						<div class="input-group">
@@ -62,34 +54,50 @@
 						</div>
 					</li>
 				</ul>
-				<div class="container-canvas" ng-show="mockup.canvas.isVisible">
-					<div ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker" style="width:{{mockup.canvas.width}}{{mockup.canvas.unit.type}}; height:{{mockup.canvas.height}}{{mockup.canvas.unit.type}};">
-			      		<div ng-include src="'views/layer/list.html'"></div>
-					</div>
-				</div>
+			</nav>
 
-			</div>
-			<div class="col-md-3 col-lg-3">
-				<div class="side-menu">
-					<accordion close-others="false">
-					    <accordion-group heading="Properties" is-open="true">
-					      <div ng-controller="PropertiesCtrl" >
-	    			      	<div ng-include src="templateProperties.url"></div>
-					      </div>
-					    </accordion-group>
-					    <accordion-group heading="Layers" is-open="true">
-					      <div ng-controller="LayerMenuCtrl">
-					      	<div ng-include src="'views/layer/listMinimize.html'"></div>
-						  </div>
-					    </accordion-group>
-					    <accordion-group heading="Bindings">
-					      <div ng-controller="BindingCtrl">
-					      	<div ng-include src="'views/binding/list.html'"></div>
-						  </div>
-					    </accordion-group>
-					</accordion>
+			<div class="container-canvas" >
+				<div ng-show="mockup.canvas.isVisible" ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker" style="width:{{mockup.canvas.width}}{{mockup.canvas.unit.type}}; height:{{mockup.canvas.height}}{{mockup.canvas.unit.type}};">
+		      		<div ng-include src="'views/layer/list.html'"></div>
 				</div>
 			</div>
-		</div>
+		</section>
+		<aside class="panels-bar">
+			<tabset justified="false">
+				<tab heading="Properties">
+					<div ng-controller="PropertiesCtrl" >
+				      	<div ng-include src="templateProperties.url"></div>
+			        </div>
+				</tab>
+			</tabset>
+			<tabset justified="false">
+				<tab heading="Layers">
+					<div ng-controller="LayerMenuCtrl">
+						<div ng-include src="'views/layer/listMinimize.html'"></div>
+					</div>
+				</tab>
+				<tab heading="Bindings">
+					<div ng-controller="BindingCtrl">
+						<div ng-include src="'views/binding/list.html'"></div>
+					</div>
+				</tab>
+			</tabset>
+
+<!-- 			<accordion close-others="false">
+			    <accordion-group heading="Properties" is-open="true">
+			      <div ng-controller="PropertiesCtrl" >
+			      	<div ng-include src="templateProperties.url"></div>
+			      </div>
+			    </accordion-group>
+			    <accordion-group heading="Layers" is-open="true">
+
+			    </accordion-group>
+			    <accordion-group heading="Bindings">
+
+			    </accordion-group>
+			</accordion> -->
+		</aside>
 	</div>
+
+
 </div>
