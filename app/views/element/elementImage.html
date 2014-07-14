@@ -1,5 +1,9 @@
 <div>
-	<div class="fileupload" style="position: absolute;"></div>
-	<img class="picture" src="http://127.0.0.1:3000/files/{{layer.content}}"  ng-style="layer.properties" />
+	<div ng-dblclick="uploadButtonHandler($event)" 
+	 class="btn btn-drop-zone ng-class:{'transparent' : layer.content};" ng-file-drop="{ url: 'http://127.0.0.1:3000/files' }" ng-file-over="another-file-over-class">
+                <i class="fa fa-cloud-download"></i>
+    </div>	
+ 	<img class="picture" src="http://127.0.0.1:3000/files/{{layer.content}}"  ng-style="layer.properties" />
+ 	<input ng-click="clickUpload($event)" ng-file-select type="file" class="hide input-upload">
 </div>
 

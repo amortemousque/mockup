@@ -13,27 +13,37 @@
 			</div>
 		</div>
 	</div>
-	<div class="row form-group">
-		<div class="col-lg-12">
-			<div class="input-group">
-				<span class="input-group-addon input-sm">C</span>
-				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderTopLeftRadius">
-				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderTopRightRadius">
-				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderBottomLeftRadius">
-				<input style="width:47px" class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderBottomRightRadius">
-			</div>
+	<div class="row row-unstyled form-group">
+		<div class="col-lg-3">
+			<span class="input-group-addon input-sm">Corner</span>
 		</div>
+		<div class="col-lg-2">
+			<input class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderTopLeftRadius">	
+		</div>
+		<div class="col-lg-2">
+			<input  class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderTopRightRadius">
+		</div>
+		<div class="col-lg-2">
+			<input  class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderBottomLeftRadius">
+		</div>
+		<div class="col-lg-3">
+			<input  class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="properties.borderBottomRightRadius">
+		</div>		
 	</div>
-	<div class="row form-group">
-		<div class="col-lg-12">
-			<div class="input-group">
-				<label class="input-group-addon input-sm">Stroke</label>
-				<input style="width:47px" class="form-control input-inline input-sm" type="number" ng-model="properties.borderWidth" />
-				<select ng-model="form.stroke" ng-options="stroke.name for stroke in strokes" class="form-control">
+	<div class="row row-unstyled form-group">
+		<div class="col-lg-3">
+			<label class="input-group-addon input-sm">Stroke</label>
+		</div>
+		<div class="col-lg-3">
+			<input class="form-control input-inline input-sm" type="number" ng-model="properties.borderWidth" />
+		</div>
+		<div class="col-lg-3">
+			<select ng-model="form.stroke" ng-options="stroke.name for stroke in strokes" class="form-control">
 				</select>
-				<ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
-				<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" />
-			</div>
+		</div>
+		<div class="col-lg-3">
+			<ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
+			<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -41,26 +51,6 @@
 			<div class="input-group">
 				<span class="input-group-addon input-sm">Rotate</span>
 				<input class="form-control input-sm" type="text" ng-model="properties.webkitTransform">
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-lg-12">
-			<div class="input-group" >
-				<span class="input-group-addon input-sm">Blur</span>
-				<input class="form-control input-sm" type="number" ng-model="filters.blur">
-			</div>
-			<div class="input-group" >
-				<span class="input-group-addon input-sm">Lighten</span>
-				<input class="form-control input-sm" type="number" ng-model="filters.lighten">
-			</div>
-			<div class="input-group" >
-				<span class="input-group-addon input-sm">Brightness</span>
-				<input class="form-control input-sm" type="number" ng-model="filters.brightness">
-			</div>
-			<div class="input-group" >
-				<span class="input-group-addon input-sm">Contrast</span>
-				<input class="form-control input-sm" type="number" ng-model="filters.contrast">
 			</div>
 		</div>
 	</div>

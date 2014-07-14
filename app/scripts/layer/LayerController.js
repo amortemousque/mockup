@@ -10,10 +10,9 @@ mockupApp
       axis: 'y'
     };
 
-    $("#canvas")[0].addEventListener("dragover", function(e){e.preventDefault();}, true);
-    $("#canvas")[0].addEventListener("drop", function(e){
-      e.preventDefault(); 
-    }, true);
+    $(document).bind('drop dragover', function (e) {
+      e.preventDefault();
+    });
 
     $scope.addLayerOnCanvas = function(){
     	if(context.tool != undefined && context.tool.type != "move" && context.tool.type != "resize") {

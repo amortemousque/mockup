@@ -12,8 +12,8 @@
 	  </div>
 
 	  <!-- Collect the nav links, forms, and other content for toggling -->
-	  <div class="collapse navbar-collapse navbar-ex1-collapse">
-	    <ul ng-controller="FileCtrl" class="nav navbar-nav">
+	  <div ng-controller="FileCtrl" class="collapse navbar-collapse navbar-ex1-collapse">
+	    <ul class="nav navbar-nav">
 	      <li class="active dropdown">
 	        <a href="" class="dropdown-toggle" data-toggle="dropdown">File <b class="caret"></b></a>
 	        <ul class="dropdown-menu">
@@ -36,31 +36,32 @@
 	        </ul>
 	      </li>
 	    </ul>
+		<div class="navbar-actions navbar-right">
+			
+		</div>
+	    <form class="ng-class:{ 'hide' : !mockup.name }; navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" class="holo text-uppercase" ng-model="mockup.name" placeholder="Name">
+            </div>
+        </form>
 	  </div><!-- /.navbar-collapse -->
+
 	</nav>
 	<div class="workspace">
 		<aside class="tools-bar resize-vertical" ng-controller="ToolCtrl" class="">
-			      	<div ng-include src="'views/tool/list.html'"></div>
+	      	<div ng-include src="'views/tool/list.html'"></div>
 		</aside>
 		<section ng-controller="LayerCtrl" >
-			<nav>
-				<ul class="tablist list-inline" ng-show="mockup.canvas.isVisible">
-					<li class="tablist-item">
-						<div class="input-group">
-							<input ng-model="mockup.name" class="input-inline form-control title" type="text" />
-							<span class="input-group-addon input-group-button">
-								<button ><i class="fa fa-times"></i></button>
-							</span>
-						</div>
-					</li>
-				</ul>
-			</nav>
-
-			<div class="container-canvas" >
+			<div class="container-canvas" ng-show="mockup.canvas.isVisible"  style="zoom:{{sliders.sliderValue * 0.01}}" >
 				<div ng-show="mockup.canvas.isVisible" ng-click="addLayerOnCanvas()" id="canvas" class="canvas canvas-main canvas-darker" style="width:{{mockup.canvas.width}}{{mockup.canvas.unit.type}}; height:{{mockup.canvas.height}}{{mockup.canvas.unit.type}};">
 		      		<div ng-include src="'views/layer/list.html'"></div>
 				</div>
 			</div>
+			<div class="container-zoom">
+				<input  class="input-zoom" type="number" ng-model="sliders.sliderValue"/>
+            	<span slider ng-model="sliders.sliderValue" min="{{testOptions.min}}" max="{{testOptions.max}}" range="true" slider-id="slider-zoom"></span>			
+        	</div>
+
 		</section>
 		<aside class="panels-bar">
 			<tabset justified="false">

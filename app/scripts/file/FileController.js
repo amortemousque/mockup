@@ -6,6 +6,7 @@ mockupApp
       $scope.mockups = fileService.getAll();
       $scope.formats = commonService.getFormats();
       $scope.canvasVisibled = false;
+      $scope.mockup = context.mockup;
   		$scope.file = {
         name: context.mockup.name,
         format: $scope.formats[0],

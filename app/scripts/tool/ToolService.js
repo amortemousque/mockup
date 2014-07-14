@@ -9,7 +9,6 @@ angular.module('mockupApp')
 	      {type: 'image', name:'image', img:'picture-o', propertiesTemplate : "views/properties/propertiesImage.html", status: "", isActive: false}
 	    ],
 
-	this.template = {url : ""}
 
 	this.getAll = function() {
 	    return this.tools;
@@ -18,10 +17,6 @@ angular.module('mockupApp')
 	this.getAllFont = function() {
 	    return this.fonts;
 	},
-
-    this.setPropertiesTemplate = function(template) {
-        this.template.url = template;
-    }
 
     this.getPropertiesTemplate = function(){
     	return this.template;

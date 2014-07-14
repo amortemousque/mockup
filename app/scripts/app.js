@@ -9,7 +9,8 @@ var mockupApp = angular.module('mockupApp',   [
   'ui',
   'ui.bootstrap',
   'mgcrea.ngStrap',
-  'blueimp.fileupload',
+  'angularFileUpload',
+  'ui.bootstrap-slider',
   'ngGrid'
 ])
   .config(function ($routeProvider) {

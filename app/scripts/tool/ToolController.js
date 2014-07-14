@@ -5,7 +5,6 @@ mockupApp
     $scope.tools = toolService.getAll();
     $scope.fonts = toolService.getAllFont();
     $scope.activateTool = function(tool) {
-		toolService.setPropertiesTemplate(tool.propertiesTemplate);
 		angular.forEach($scope.tools, function(tool, key){
 			tool.isActive = false;
 		});

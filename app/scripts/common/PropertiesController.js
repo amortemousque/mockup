@@ -6,11 +6,18 @@ mockupApp
     $scope.context = context;
 	$scope.fonts = commonService.getFonts();
     $scope.strokes = commonService.getStrokes();
-    $scope.templateProperties = toolService.getPropertiesTemplate();
+    $scope.templateProperties = { url: "" };
     $scope.filters = {
     	blur:0
     };
     $scope.properties = commonService.getProperties();
+
+    $scope.templates = [
+          {type: 'shape', propertiesTemplate: "views/properties/propertiesShape.html"},
+          {type: 'resize',  propertiesTemplate: "views/properties/propertiesResize.html"},
+          {type: 'text',  propertiesTemplate : "views/properties/propertiesText.html"},
+          {type: 'image',  propertiesTemplate : "views/properties/propertiesImage.html" }
+        ],
 
 	$scope.form = {
 		font: $scope.fonts[0],
@@ -31,6 +38,7 @@ mockupApp
 
     $scope.$watch('context.layer', function() {
     	if(context.layer != undefined) {
+        $scope.templateProperties.url = $filter('filter')($scope.templates, {$: context.layer.type }, false)[0].propertiesTemplate;
 		    $scope.properties = context.layer.properties;
 	    	$scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
 	    	$scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
