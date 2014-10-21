@@ -3,10 +3,11 @@ angular.module('mockupApp')
 
 	this.tools = [
 	      {type: 'move', name:'move', img:'arrow-up', propertiesTemplate : "", status: "", isActive: false},
-	      {type: 'shape', name:'shape', img:'square-o', propertiesTemplate: "views/properties/propertiesShape.html", status: "", isActive: false},
-	      {type: 'resize', name:'resize', img:'arrows', propertiesTemplate: "views/properties/propertiesResize.html",  status: "", isActive: false},
-	      {type: 'text', name:'text', img:'text-width', propertiesTemplate : "views/properties/propertiesText.html", status: "", isActive: false},
-	      {type: 'image', name:'image', img:'picture-o', propertiesTemplate : "views/properties/propertiesImage.html", status: "", isActive: false}
+	      {type: 'rectangle', name:'rectangle', img:'square-o', status: "", isActive: false},
+  	      {type: 'ellipse', name:'ellipse', img:'square-o', status: "", isActive: false},
+	      {type: 'text', name:'text', img:'text-width', status: "", isActive: false},
+	      {type: 'richText', name:'richText', img:'text-width', status: "", isActive: false},
+	      {type: 'image', name:'image', img:'picture-o', status: "", isActive: false}
 	    ],
 
 

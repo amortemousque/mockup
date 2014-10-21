@@ -7,36 +7,19 @@ mockupApp
         replace: true,
         require: 'ngModel',
         controller: function($scope, $element) {
-          console.log("element", $element);
-          $scope.dblClickTextElem = function(){
-            if(context.tool.type == $scope.layer.type){
-              $scope.$textarea.show().focus();
-              $scope.$p.hide();
-            }
-            return false;
-          }
-          $scope.blurTextElem = function() {
-            $scope.$textarea.hide();
-            $scope.$p.show();
-            return false;
-          }
-          $scope.calculeSize = function() {
-            $scope.layer.properties.width =  $(this).outerWidth();
-            $scope.layer.properties.height =  $(this).outerHeight();
-            $scope.$apply();
-            return false;
-          }
-          $scope.$p = $element.find("p").hide();
-          $scope.$textarea = $element.find("textarea")
-            .css({
-              "top": 0, 
-              "left": 0})
-            .addClass("form-control")
-            .focusout($scope.blurTextElem)
-            .mouseup($scope.calculeSize)  
-            .focus();
-          $element.dblclick($scope.dblClickTextElem);
-        },
-        templateUrl : '/views/element/elementText.html'
+          var svg = Snap("#svg");
+          var elem = svg.select("#svg g:last-child > g");
+          $scope.context = context;
+          $scope.layerService = layerService;
+          $scope.elem = elem.text(0, 0, $scope.layer.text);
+
+          var helper = new ElementHelper();
+          helper.init($scope, $scope.layer);
+
+          $scope.$watch('layer.text', function(text){
+            $scope.elem.node = text;
+            $scope.elem.attr("text", context.layer.text);
+          }, true);
+        }
       }
   }]);

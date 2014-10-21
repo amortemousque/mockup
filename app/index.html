@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="bower_components/colorpicker/css/colorpicker.css">
 
         <link rel="stylesheet" href="bower_components/gradX/gradX.css">
+        <link rel="stylesheet" href="bower_components/tinymce/skins/lightgray/skin.min.css">
 
         <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/bootstrap-theme.css">
@@ -67,10 +68,11 @@
            ga('send', 'pageview');
         </script>
 
-        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-
+        <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.js"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -93,14 +95,20 @@
         <script src="bower_components/ng-grid/build/ng-grid.js"></script>
 
         <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
-        <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
         <script src="bower_components/angular-bootstrap-slider/slider.js"></script>
-
+        
         <!-- endbuild -->
         <script src="bower_components/spectrum/spectrum.js"></script>
         <script src="bower_components/pixastic/pixastic.custom.js"></script>
         <script src="bower_components/colorpicker/js/colorpicker.js"></script>
         <script src="bower_components/gradX/gradX.js"></script>
+        <script src="bower_components/snap.svg/dist/snap.svg.js"></script>
+
+        <script src="bower_components/Snap.FreeTransform-master/snap.freetransform.js"></script>
+
+        <script src="bower_components/snap.svg/snaptut-freetransform.js"></script>
+        <script src="bower_components/jquery.tinymce/jscripts/tiny_mce/tiny_mce_src.js"></script>
+        <script src="bower_components/jquery.tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>
 
         
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -109,8 +117,10 @@
         
         <script src="scripts/element/ElementBaseDirective.js"></script>
         <script src="scripts/element/ElementTextDirective.js"></script>
+        <script src="scripts/element/ElementRichTextDirective.js"></script>
         <script src="scripts/element/ElementImageDirective.js"></script>
-        <script src="scripts/element/ElementShapeDirective.js"></script>
+        <script src="scripts/element/ElementRectangleDirective.js"></script>
+        <script src="scripts/element/ElementEllipseDirective.js"></script>
 
         <script src="scripts/common/CommonService.js"></script>
         <script src="scripts/common/ContextService.js"></script>
@@ -124,7 +134,7 @@
         <script src="scripts/layer/LayerController.js"></script>
         <script src="scripts/layer/LayerMenuController.js"></script>
         <script src="scripts/tool/ToolController.js"></script>
-        <script src="scripts/common/PropertiesController.js"></script>
+        <script src="scripts/properties/PropertiesController.js"></script>
         <script src="scripts/binding/BindingController.js"></script>
 
         <!-- endbuild -->

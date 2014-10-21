@@ -1,5 +1,9 @@
-<lu class="list-layer">
-	<li style="width:{{canvas.width}}{{canvas.unit.type}}; height:{{canvas.height}}{{canvas.unit.type}}" ng-repeat="layer in layers" data-type="{{layer.type}}" class="layer position-1" ng-show="layer.isShow">
-		<div element-base ng-model="layer" ></div>
-	</li>
-</lu>
+<g width="{{canvas.width}}" height="{{canvas.height}}" ng-repeat="layer in layers" data-type="{{layer.type}}" class="layer position-1" ng-show="layer.isShow" ng-switch="layer.type">
+	<g id="layer-{{$index}}"  ng-switch-when="text"><g element-text ng-model="layer"></g></g>
+	<g id="layer-{{$index}}"  ng-switch-when="richText"><g element-rtext ng-model="layer"></g></g>
+	<g id="layer-{{$index}}"  ng-switch-when="image"><g element-image ng-model="layer"></g></g>
+	<g id="layer-{{$index}}"  ng-switch-when="rectangle"><g element-rectangle ng-model="layer"></g></g>
+	<g id="layer-{{$index}}"  ng-switch-when="ellipse"><g element-ellipse ng-model="layer"></g></g>
+	<g id="layer-{{$index}}"  ng-switch-default></g>
+</g>
+

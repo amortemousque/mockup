@@ -1,5 +1,5 @@
 mockupApp
-  .directive('elementImage', ["context", "layerService", "$fileUploader", function(context, layerService, $fileUploader) {
+  .directive('elementImage', ["context", "layerService", function(context, layerService) {
       return {
         restrict: 'AE',
         transclude: true,
@@ -8,13 +8,25 @@ mockupApp
         require: 'ngModel',
         controller: function($scope, $element) {
             
-            $scope.$content = $element.parent().parent();
-            $scope.inputUpload = $scope.$content.find('.input-upload');
-            $scope.image = $scope.$content.find(".picture");
-            if($scope.layer.content != undefined) {
-              $scope.image.src = $scope.layer.content;
-            }
+            console.log($scope.dataDrag);
 
+            var svg = Snap("#svg");
+            var elem = svg.select("#svg g:last-child > g");
+            $scope.context = context;
+            $scope.layerService = layerService;
+            $scope.layer.size.width = $scope.dataDrag.size.width / 3;
+            $scope.layer.size.height = $scope.dataDrag.size.width / 3;
+            
+            $scope.elem = elem.image("http://127.0.0.1:3000/files/" + $scope.dataDrag.name, 10, 10, $scope.layer.size.width, $scope.layer.size.height);
+
+            var helper = new ElementHelper();
+            helper.init($scope, $scope.layer);
+
+            $scope.$watch('layer.size', function(size){
+              $scope.ft.attrs.scale.x = size.width;
+              $scope.ft.attrs.scale.y = size.height;
+              $scope.ft.apply(true);
+            }, true);
             // $scope.$watch('layer.filters', function() {
             //   Pixastic.revert($scope.image[0]);
             //   $scope.image.pixastic("blurfast", {amount:$scope.layer.filters.blur})
@@ -22,42 +34,13 @@ mockupApp
             //         .pixastic("brightness", {brightness:$scope.layer.filters.brightness,contrast:$scope.layer.filters.contrast});
             // }, true);
 
-          $scope.uploadButtonHandler = function(event) {
-            $scope.inputUpload.trigger("click");
-            event.stopPropagation();
-            return false;
-          }
-
-          $scope.clickUpload = function(event){
-            event.stopPropagation();
-          }
 
 
 
 
-          var uploader = $scope.uploader = $fileUploader.create({
-              scope: $scope,                          // to automatically update the html. Default: $rootScope
-              url: "http://127.0.0.1:3000/files",
-              autoUpload: true,
-              method: "POST",
-          });
-          uploader.bind('success', function (event, xhr, item, response) {
-            console.log("complete", response);
-            $scope.layer.content = response.name;
-            $scope.layer.properties.width = Math.round((response.size.width * $scope.layer.properties.height) / response.size.height);
-          });
-          // Images only
-          uploader.filters.push(function(item /*{File|HTMLInputElement}*/) {
-              var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-              type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-              return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-          });
 
 
-
-
-        },
-        templateUrl : '/views/element/elementImage.html'
+        }
       }
 
   }]);

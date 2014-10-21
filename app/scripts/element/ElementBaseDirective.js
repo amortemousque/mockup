@@ -1,83 +1,67 @@
-mockupApp
-  .directive('elementBase', ["context", "layerService", function(context, layerService) {
-      return {
-        restrict: 'AE',
-        transclude: true,
-        //scope: false,
-        replace: false,
-        require: 'ngModel',
-        controller: function($scope, $element) {
-          $element = $($element.find(".elem"));
-          $scope.context = context;
-          $scope.mouseFocusElem = function(){
-              $element.find(".btn-remove").removeClass("hide");
-              $("#field-style").val($element.attr("style"));
-          }
+function ElementHelper() {
 
-          $scope.mouseBlurElem = function(){
-            $element.find(".btn-remove").addClass("hide");
-          }
+  this.init = function($scope, model) {
 
-          $scope.activeElem = function($event) {
-            if(context.tool.type == $scope.layer.type || context.tool.type == 'move'|| context.tool.type == 'resize') {
-              context.layer = $scope.layer;
-              layerService.setActive($scope.layer);
-              if($event.type == "dragstart" ||  $event.type == "resizestart") {
-                $scope.$apply();
-              }
-            } 
-            $event.stopPropagation();
-          }
 
-          $scope.clickRemoveElement = function($event){
-            layerService.remove($scope.layer);
-            $event.stopPropagation();
-          }
-        
-          $scope.layer.properties.top = $scope.layer.position.top;
-          $scope.layer.properties.left = $scope.layer.position.left;
+    $scope.ft = Snap.freeTransform($scope.elem, $scope, {
+      draw: ['bbox'],
+      drag: ['center', 'self'],
+     // keepRatio: ['bboxCorners'],
+      rotate: ['axisX'],
+      scale: ['bboxCorners', 'bboxSides'],
+      distance: '1.6',
+      snap: { rotate:0 },
+      snapDist: { rotate:20 }
 
-          var startX = 0, startY = 0, x = 0, y = 0;
-          var paramsDraggable = { containment: "#canvas", scroll: false };
+    }, cb);
 
-          $element
-          .resizable({
-            start: $scope.activeElem,
-            resize: $scope.resizeElem,
-            stop: function( event, ui ) {
-                $scope.layer.properties.height = ui.size.height; 
-                $scope.layer.properties.width = ui.size.width;
-                $scope.$apply();
-            },
-            disabled: true
-          })
-          .draggable(
-            { 
-              containment: "#canvas", 
-              scroll: false,
-              disabled: true,
-              start: $scope.activeElem,
-              stop: function(event, ui) {
-                $scope.layer.position.top = ui.position.top; 
-                $scope.layer.position.left = ui.position.left;
-                $scope.$apply();
-
-              }
-          });
-          $scope.element = $element;
-          $scope.$watch('context.tool', function(tool) {
-            if(context.tool != undefined && context.tool.type != "resize"){
-              $scope.element.resizable('disable');
-            } else {
-              $scope.element.resizable('enable');
-            }
-            if(context.tool != undefined && context.tool.type != "move"){
-              $scope.element.draggable('disable');
-            } else {
-              $scope.element.draggable('enable');
-            }
-          });
-        },
-        templateUrl : '/views/element/elementBase.html'
+    $scope.layer.ft = $scope.ft;
+    this.translate($scope, model.position);
+    this.watching($scope);
+    this.click($scope);
+    function cb(subject, ev){
+      if($scope.layer.type == "rectangle" || $scope.layer.type == "image") {
+        $scope.layer.size.width = subject.attrs.scale.x;
+        $scope.layer.size.height = subject.attrs.scale.y;
+      } else {
+        $scope.layer.properties.rx = subject.attrs.scale.x;
+        $scope.layer.properties.ry = subject.attrs.scale.y;
+        $scope.layer.properties.width = subject.attrs.scale.x * 2;
+        $scope.layer.properties.height = subject.attrs.scale.y * 2;
       }
-  }]);
+    }
+
+    $scope.$watch('layer.isActive', function(isActive){
+      if(isActive == true) { 
+        $scope.ft.showHandles();
+      } else {
+        $scope.ft.hideHandles();
+      }
+    });
+
+  },
+
+  this.translate = function($scope, position) {
+    $scope.ft.attrs.translate = {x:position.left, y:position.top};
+    $scope.ft.apply();
+  },
+
+  this.watching = function($scope) {
+    var $scope = $scope;
+    $scope.$watch('layer.properties', function(properties){
+      for(var propertyName in properties) {
+        $scope.elem.attr(propertyName, properties[propertyName]);
+      }
+    }, true);
+  },
+
+  this.click = function($scope) {
+    var $scope = $scope;
+    $scope.elem.click(function(e){
+      $scope.context.layer = $scope.layer;
+      $scope.layerService.setActive($scope.layer);
+      $scope.$apply(); 
+      e.stopPropagation();  
+    });
+  }
+}

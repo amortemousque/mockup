@@ -42,32 +42,6 @@ angular.module('mockupApp')
       {name:'outset', css:'outset', img : "", status: ""}
     ],
 
-	this.properties = {
-		color: "#fff",
-		textShadow: "",
-		fontSize: 14,
-		fontFamily: "Helvetica Neue",
-		borderStyle: "none", 
-		textAlign: "",
-		lineHeight: 1,
-		verticalAlign: "",
-		textDecoration: "",
-		webkitTransform: "",
-		width: "",
-		height: "",
-		outlineStyle: "none",
-		webkitBackgroundClip: "none",
-		boxShadow: "none",
-		toArray: function() {
-			var list = [];
-			angular.forEach(this, function(value, key) {
-		       this.push(key);
-		     }, list);
-			return list;
-		}
-
-	},
-
 	this.getUnits = function(){
 		return this.units;
 	}
@@ -88,37 +62,5 @@ angular.module('mockupApp')
 		return this.formats;
 	}
 
-	this.setProperties = function(properties){
-		this.properties = properties;
-	}
 
-	this.mapProperties = function(source, target){
-		console.log("mappProperties");
-		target.color = source.color;
-		target.textShadow = source.textShadow;
-		target.fontSize = source.fontSize;
-		target.fontFamily = source.fontFamily;
-		target.borderStyle = source.borderStyle;
-		target.textAlign = source.textAlign;
-		target.lineHeight = source.lineHeight;
-		target.verticalAlign = source.verticalAlign;
-		target.textDecoration = source.textDecoration;
-		target.webkitTransform = source.webkitTransform;
-		target.width = source.width;
-		target.height = source.height;
-		target.outlineStyle =  source.outlineStyle;
-		target.webkitBackgroundClip = source.webkitBackgroundClip;
-		target.webkitTextFillColor = source.webkitTextFillColor;
-		if(source.boxShadow != undefined) {
-			target.boxShadow = source.boxShadow;
-		}
-		if(source.textShadow != undefined) {
-			target.textShadow = source.textShadow;
-		}
-		if(source.backgroundImage != undefined) {
-			target.backgroundImage = source.backgroundImage;
-		}
-	}
-
-	this.get
 }]);

@@ -1,11 +1,15 @@
 angular.module('mockupApp')
-.service('layerService', ['$resource', 'context', function($resource, context) {
+.service('layerService', ['$resource', '$http', 'context', function($resource, $http, context) {
 
   this.Layers = $resource('http://localhost:port/layers/:id', {port: ':3000'},
   {
       'update': { method:'PUT' },
       'save': {method: 'POST', isArray: true }
   });
+
+  this.create = function(type) {
+      return $http.get('model/'+ type +'.json');
+  } 
 
   this.MockupLayers = $resource('http://localhost:port/mockupLayers/:id', {port: ':3000'},
   {

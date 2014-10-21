@@ -1,0 +1,39 @@
+<form class="form-horizontal form-sm">
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<label class="input-group-addon input-sm" for="">Fill</label>
+				<input id="fill" type="color" value="{{layer.propreties.backgroundColor}}" ng-model="layer.propreties.fill" ng-change="fillChange()"/>
+<!-- 				<ui-colorpicker ng-model="properties.backgroundColor"></ui-colorpicker>
+				<input class="form-control input-sm" type="hidden" ng-model="properties.backgroundColor" /> -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="row  row-unstyled form-group">
+		<div class="col-xs-2">
+			<label class="input-group-addon input-sm">Stroke</label>
+		</div>
+		<div class="col-xs-3">
+			<input  class="form-control input-inline input-sm" type="number" ng-model="layer.properties.strokeWidth" />
+		</div>
+		<div class="col-xs-3">
+			<input type="color" id="strokeColor" ng-model="layer.propreties.stroke" ng-change="strokeColorChange()"/>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon input-sm">Width</span>
+				<input class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="layer.properties.width">
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group">
+				<label class="input-group-addon input-sm" for="">Height</label>
+				<input class="input-inline form-control input-sm ng-pristine ng-valid ng-valid-number" type="number" ng-model="layer.properties.width">
+			</div>
+		</div>
+	</div>
+
+</form>

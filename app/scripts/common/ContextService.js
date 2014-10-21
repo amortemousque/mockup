@@ -1,5 +1,11 @@
 angular.module('mockupApp')
 .service('context', ['$http', 'commonService', function($http, commonService) {
+
+  this.shortCut = {
+    shiftPressed: false,
+    ctrlTPressed: false
+  }
+
 	this.mockup = { //mockup usually charged
 		name: undefined,
 		canvas: {
@@ -9,6 +15,8 @@ angular.module('mockupApp')
       isVisible: false
     }
 	},
+
+  this.svg = undefined;
 
   this.layers = [],
 

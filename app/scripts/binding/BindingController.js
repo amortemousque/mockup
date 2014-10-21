@@ -3,7 +3,7 @@
 mockupApp
   .controller('BindingCtrl', ['$scope', '$modal', 'context', 'bindingService', 'commonService',function ($scope, $modal, context, bindingService, commonService) {
     $scope.context = context;
-    $scope.propertiesList = commonService.properties.toArray();
+    $scope.propertiesList = commonService.properties;
 
     $scope.newBinding = function() {
     	$scope.context.layer.bindings.push({property: "", name: ""});
