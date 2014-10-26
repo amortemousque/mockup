@@ -13,7 +13,7 @@ mockupApp
       axis: 'y'
     };
 
-    $scope.onFileSelect = function($files) {
+  $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
     for (var i = 0; i < $files.length; i++) {
       var file = $files[i];
@@ -42,7 +42,6 @@ mockupApp
           }
           layer.position.top = window.mouseY - canvasPosition.top;
           layer.position.left = window.mouseX - canvasPosition.left;
-
 
           $scope.layerService.add(layer);
           context.layer = layer;

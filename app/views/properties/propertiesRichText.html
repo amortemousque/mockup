@@ -1,58 +1,48 @@
 <form class="form-horizontal form-sm">
 	<div class="row form-group">
-		<div lo-color-picker class="col-lg-8">
-			<input class="form-control input-sm" type="text" ng-model="layer.text" />
-		</div>
-	</div>
-	<div class="row form-group">
 		<div lo-color-picker class="col-lg-4">
-			<input class="form-control input-sm" type="number" ng-model="layer.properties.fontSize" />
+			<input type="number"  class="form-control input-sm" id="fontsize" />
 		</div>
 		<div lo-color-picker class="col-lg-8">
-			<select ng-model="form.font" ng-options="font.name for font in fonts"></select>
+			<select id="fontselect" ng-model="form.font" ng-options="font.css as font.name for font in fonts"></select>
 		</div>
 	</div>
 	<div class="row form-group">
 		<div class="col-lg-4">
-			<ui-colorpicker ng-model="layer.properties.fill"></ui-colorpicker>
-			<input class="form-control input-sm" type="hidden" ng-model="layer.properties.fill" />
+			<input class="form-control input-sm" type="color" id="forecolor"/>
 		</div>
 		<div class="col-lg-8">
 			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'left'};" ng-click="layer.properties.textAlign = 'left'"><span class="glyphicon glyphicon-align-right"></span></button>
-				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'center'};" ng-click="layer.properties.textAlign = 'center'"><span class="glyphicon glyphicon-align-center"></span></button>
-				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'right'};" btn-sm ng-click="layer.properties.textAlign = 'right'"><span class="glyphicon glyphicon-align-left"></span></button>
-				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'justify'};" ng-click="layer.properties.textAlign = 'justify'"><span class="glyphicon glyphicon-align-justify"></span></button>
+				<button type="button" id="justifyleft" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'left'};"><span class="glyphicon glyphicon-align-right"></span></button>
+				<button type="button" id="justifycenter" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'center'};" ng-click="layer.properties.textAlign = 'center'"><span class="glyphicon glyphicon-align-center"></span></button>
+				<button type="button" id="justifyright" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'right'};" btn-sm ng-click="layer.properties.textAlign = 'right'"><span class="glyphicon glyphicon-align-left"></span></button>
+				<button type="button" id="justifyfull" class="btn btn-default btn-sm ng-class: {active: layer.properties.textAlign == 'justify'};" ng-click="layer.properties.textAlign = 'justify'"><span class="glyphicon glyphicon-align-justify"></span></button>
 			</div>
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<div class="col-lg-4">
-			<div class="input-group" style="width:20px">
-				<span class="input-group-addon input-sm"><i class="fa fa-text-height"></i></span>
-				<input style="width:40px;" class="input-inline form-control input-sm" type="number" ng-model="layer.properties.lineHeight" />
+			<div class="btn-group">
+				<button type="button" class="btn btn-default btn-sm" id="numlist" ><i class="fa fa-list-ol"></i></button>
+				<button type="button" class="btn btn-default btn-sm" id="bullist" ><i class="fa fa-list-ul"></i></button>
 			</div>
 		</div>
 		<div class="col-lg-8">
 			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textDecoration == 'underline'};" ng-click="layer.properties.textDecoration = 'underline'"><i class="fa fa-underline"></i></button>
-				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textDecoration == 'line-through'};" ng-click="layer.properties.textDecoration = 'line-through'"><i class="fa fa-strikethrough"></i></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textDecoration == 'underline'};" id="bold" ><i class="fa fa-bold"></i></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textDecoration == 'underline'};" id="italic" ><i class="fa fa-italic"></i></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textDecoration == 'underline'};" id="underline" ><i class="fa fa-underline"></i></button>
+				<button type="button" class="btn btn-default btn-sm ng-class: {active: layer.properties.textDecoration == 'line-through'};" id="strikethrough"><i class="fa fa-strikethrough"></i></button>
 			</div>
 		</div>
 	</div>
-		<div class="row  row-unstyled form-group">
-		<div class="col-xs-2">
-			<label class="input-group-addon input-sm">Stroke</label>
+	<div class="form-group">
+		<div class="col-lg-4">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default btn-sm" id="code" ><i class="fa fa-code"></i></button>
+			</div>
 		</div>
-		<div class="col-xs-3">
-			<input  class="form-control input-inline input-sm" type="number" ng-model="layer.properties.strokeWidth" />
-		</div>
-		<div class="col-xs-3">
-			<input type="color" id="strokeColor" ng-model="layer.propreties.stroke" ng-change="strokeColorChange()"/>
 
-			<!-- <ui-colorpicker ng-model="properties.borderColor"></ui-colorpicker>
-			<input class="hide form-control input-inline input-sm" type="text" ng-model="properties.borderColor" /> -->
-		</div>
 	</div>
 </form>

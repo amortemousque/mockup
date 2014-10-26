@@ -16,11 +16,12 @@ function ElementHelper() {
     }, cb);
 
     $scope.layer.ft = $scope.ft;
+
     this.translate($scope, model.position);
     this.watching($scope);
     this.click($scope);
     function cb(subject, ev){
-      if($scope.layer.type == "rectangle" || $scope.layer.type == "image") {
+      if($scope.layer.type == "rectangle" || $scope.layer.type == "image" || $scope.layer.type=="richText") {
         $scope.layer.size.width = subject.attrs.scale.x;
         $scope.layer.size.height = subject.attrs.scale.y;
       } else {

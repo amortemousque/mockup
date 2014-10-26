@@ -12,22 +12,22 @@ angular.module('mockupApp')
 
 	this.fonts = [
 		{css: "Arial", name : "Arial"}, 
-		{css: "Arial Black", name : "Arial Black"}, 
-		{css: "Helvetica", name : "Helvetica"}, 
-		{css: "sans-serif", name : "sans-serif"}, 
-		{css: "Comic Sans MS", name : "Comic Sans MS"},
-	    {css: "Courier New",name : "Courier New"}, 
-	    {css: "Georgia",name : "Georgia"}, 
-	    {css: "Impact",name : "Impact"}, 
-	    {css: "Lucida Console",name : "Lucida Console"}, 
-	    {css: "Palatino Linotype",name : "Palatino Linotype"},
-	    {css: "Tahoma",name : "Tahoma"}, 
-	    {css: "Times New Roman",name : "Times New Roman"}, 
-	    {css: "Trebuchet MS",name : "Trebuchet MS"}, 
-	    {css: "Verdana",name : "Verdana"}, 
-	    {css: "Geneva",name : "Geneva"},
-	    {css: "MS Sans Serif",name : "MS Sans Serif"},
-	    {css: "Helvetica Neue", name: "Helvetica Neue"}
+		{css: "ArialBlack", name : "Arial Black"}, 
+		// {css: "Helvetica", name : "Helvetica"}, 
+		// {css: "sans-serif", name : "sans-serif"}, 
+		// {css: "Comic Sans MS", name : "Comic Sans MS"},
+	 //    {css: "Courier New",name : "Courier New"}, 
+	 //    {css: "Georgia",name : "Georgia"}, 
+	 //    {css: "Impact",name : "Impact"}, 
+	 //    {css: "Lucida Console",name : "Lucida Console"}, 
+	 //    {css: "Palatino Linotype",name : "Palatino Linotype"},
+	 //    {css: "Tahoma",name : "Tahoma"}, 
+	 //    {css: "Times New Roman",name : "Times New Roman"}, 
+	 //    {css: "Trebuchet MS",name : "Trebuchet MS"}, 
+	 //    {css: "Verdana",name : "Verdana"}, 
+	 //    {css: "Geneva",name : "Geneva"},
+	 //    {css: "MS Sans Serif",name : "MS Sans Serif"},
+	 //    {css: "Helvetica Neue", name: "Helvetica Neue"}
     ],
 
     this.strokes = [

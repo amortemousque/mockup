@@ -6,14 +6,10 @@
     "top": 0,
     "left": 0
   },
-  "properties": {
-    "fill": "#000000",
-    "stroke": "#000000",
-    "strokeWidth": 0,
-    "fontFamily": "Helvetica Neue",
-    "fontSize": 14,
-    "textDecoration": "none"
+  "size": {
+    "width": 400,
+    "height": 300
   },
   "bindings": [],               
-  "text": "Text"
+  "html": ""
 }
