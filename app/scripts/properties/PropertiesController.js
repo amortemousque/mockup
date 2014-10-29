@@ -18,18 +18,6 @@ mockupApp
       content: ""
   	}
 
-    $scope.$watch('form.font', function(font) {
-    	if(font != undefined) {
-    		$scope.layer.properties.fontFamily = font.css;
-    	}	
-    });
-
-    // $scope.$watch('form.stroke', function(stroke) {
-		  // if(stroke != undefined) {
-    // 		$scope.layer.properties.borderStyle = stroke.css;
-    // 	}	
-    // });
-
     $scope.fillChange = function() {
       $scope.layer.properties.fill = $(event.target).val();
     }
@@ -53,8 +41,6 @@ mockupApp
         $scope.layer = context.layer;
         $scope.templateProperties.url = "views/properties/properties"+ context.layer.type.substr(0, 1).toUpperCase() + context.layer.type .substr(1) +".html";
 		    $scope.properties = context.layer.properties;
-	    	$scope.form.font = $filter('filter')($scope.fonts, {$: $scope.properties.fontFamily }, false)[0];
-	    	$scope.form.stroke = $filter('filter')($scope.strokes, {$: $scope.properties.borderStyle }, false)[0];
 	   }
 	});
  }]);
