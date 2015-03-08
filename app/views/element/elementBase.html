@@ -1,10 +1,10 @@
-<g 
- class="elem ng-class:{'active' : layer.isActive} " 
- ng-blur="mouseBlurElem()"  
- ng-focus="mouseFocusElem()" 
+<g
+ class="elem ng-class:{'active' : layer.isActive} "
+ ng-blur="mouseBlurElem()"
+ ng-focus="mouseFocusElem()"
  ng-click="activeElem($event)"
  style="left:{{layer.position.left}}px; top:{{layer.position.top}}px"
- 
+
  >
 	<g ng-switch-when="text"><g element-text ng-model="layer"></g></g>
 	<g ng-switch-when="image"><g element-image ng-model="layer"></g></g>

@@ -14,34 +14,29 @@ mockupApp
           $scope.text = $(svg.select("textarea"));
 
           function createElement() {
-            var text = Snap.parse('<g><foreignObject><p class="tinyMce"></p></foreignObject></g>');
+            var text = Snap.parse('<g><foreignObject width="100%" height="100%"><p class="tinyMce"></p></foreignObject></g>');
             $scope.group = g.append(text);
             $scope.elem = $element.find("g")
             $scope.foreignObject = $element.find("foreignObject");
           }
 
-          function setSize(size) {
-            $scope.foreignObject.attr("width", $scope.layer.size.width);
-            $scope.foreignObject.attr("height", $scope.layer.size.height);
-          }
-
-          function setPosition(position) {
-            $scope.foreignObject.attr("x", $scope.layer.position.top);
-            $scope.foreignObject.attr("y", $scope.layer.position.left);          
-          }
-
           function onMove(dx, dy, x, y, ev) {
-            var x = parseFloat($scope.foreignObject.attr("x"));
-            var y = parseFloat($scope.foreignObject.attr("y"));
-            $scope.foreignObject.attr("x", x - x);
-            $scope.foreignObject.attr("y", y - y);
-            //$(ev.target).attr("x", x);
+            // var x = parseFloat($scope.foreignObject.attr("x"));
+            // var y = parseFloat($scope.foreignObject.attr("y"));
+            // $scope.foreignObject.attr("x", x - x);
+            // $scope.foreignObject.attr("y", y - y);
             ev.stopPropagation();
           }
 
-          function onChangeContent(ed, l) {
-            $scope.context.layer.text = l.content;
+          function onChangeContent(e) {
+            $scope.context.layer.text = tinymce.activeEditor.getContent();
             $scope.$apply();
+          }
+
+          function onQuitWysiwyg(e) {
+            if($element.find("p").tinymce() != undefined) {
+              $element.find("p").tinymce().remove();
+            }
           }
 
           function onPostRender(ed) {
@@ -96,28 +91,30 @@ mockupApp
               console.log("code", $(this).val());
                tinymce.execCommand('mceCodeEditor', true);
             });
-
           }
+
+          function initWysiwig(){
+            $element.find("p").tinymce({
+              plugins : "pagebreak,table,save,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,template",
+              toolbar: "false",
+              menubar:"false",
+              resize: "both",
+              height:$scope.layer.size.height,
+              width:$scope.layer.size.width,
+              setup : function(ed) {         
+                ed.on("blur", onChangeContent)
+                ed.on("PostRender", onPostRender);
+                $(".mce-tinymce").draggable();
+              }
+            }); 
+          } 
+
           createElement();
-          setSize($scope.layer.size);
-          setPosition($scope.layer.position);
           $scope.group.drag(onMove);
+          $("#canvas").click(onQuitWysiwyg);
+          $element.find("p").dblclick(initWysiwig);
+          initWysiwig();
 
-          $element.find("p").tinymce({
-            script_url : '/bower_components/jquery.tinymce/jscripts/tiny_mce/tiny_mce.js',            
-            theme : "advanced",
-            plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-            toolbar: "false",
-            menubar:"false",
-            setup : function(ed) {         
-              ed.onChange.add(onChangeContent);
-              ed.onPostRender.add(onPostRender);
-            }
-          }); 
-
-         $scope.$watch('context.tool', function(tool){
-            $element.find("p").tinymce().remove();
-          });
 
         }
       }
